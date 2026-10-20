@@ -1,0 +1,35 @@
+---
+import ToolLayout from "../../../layouts/ToolLayout.astro";
+import { TemperatureConverter } from "../../../components/converters/TemperatureConverter.js";
+import { getToolByPath } from "../../../content/tools.js";
+
+const tool = getToolByPath("/tools/converters/temperature")!;
+---
+
+<ToolLayout
+  tool={tool}
+  description="Convert between Celsius, Fahrenheit, and Kelvin, including negative values."
+  purpose="Convert a temperature value between Celsius, Fahrenheit, and Kelvin."
+>
+  <TemperatureConverter client:load />
+
+  <Fragment slot="details">
+    <h2>Formulas</h2>
+    <ul>
+      <li><code>°F = (°C × 9/5) + 32</code></li>
+      <li><code>K = °C + 273.15</code></li>
+    </ul>
+
+    <h2>Worked example</h2>
+    <p>0°C = 32°F = 273.15 K (water's freezing point). 100°C = 212°F = 373.15 K (water's boiling point at sea level).</p>
+
+    <h2>Assumptions and limitations</h2>
+    <ul>
+      <li>Negative values are fully supported for Celsius and Fahrenheit (e.g. −40°C = −40°F).</li>
+      <li>Kelvin cannot go below absolute zero (0 K = −273.15°C = −459.67°F). Entering a value that would imply a sub-absolute-zero temperature is rejected rather than silently computed.</li>
+    </ul>
+
+    <h2>Reference</h2>
+    <p>The Celsius-Kelvin offset (273.15) and absolute zero are defined by the International System of Units (SI), as maintained by the Bureau International des Poids et Mesures (BIPM) and adopted by NIST.</p>
+  </Fragment>
+</ToolLayout>

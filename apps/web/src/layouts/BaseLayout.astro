@@ -1,0 +1,57 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { siteConfig, allowIndexing } from "../config/site.js";
+
+interface Props {
+  title: string;
+  description: string;
+  /**
+   * Defaults to the site's overall indexing policy (`allowIndexing` — false
+   * for the localhost/invalid-URL safety net or an explicit
+   * PUBLIC_ROBOTS_POLICY=noindex staging deploy), so a staging/misconfigured
+   * build gets a noindex meta tag on every page, not just a blocking
+   * robots.txt. Pages that should never be indexed regardless (404,
+   * search/filter states) can still force `false` explicitly.
+   */
+  index?: boolean;
+}
+
+const { title, description, index = allowIndexing } = Astro.props;
+const canonicalUrl = new URL(Astro.url.pathname, siteConfig.url).toString();
+const pageTitle = title === siteConfig.name ? title : `${title} | ${siteConfig.name}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    {!index && <meta name="robots" content="noindex, follow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-teal-700 focus:px-4 focus:py-2 focus:text-white"
+    >
+      Skip to content
+    </a>
+    <Header />
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

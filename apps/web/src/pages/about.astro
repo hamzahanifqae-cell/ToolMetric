@@ -1,0 +1,52 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { siteConfig } from "../config/site.js";
+---
+
+<BaseLayout title="About" description={`About ${siteConfig.name}: what it offers and how its tools process your data.`}>
+  <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6">
+    <Breadcrumbs items={[{ label: "About" }]} />
+    <h1 class="text-2xl font-bold text-navy-900 sm:text-3xl">About {siteConfig.name}</h1>
+
+    <div class="prose-tool mt-6">
+      <h2>What this site offers</h2>
+      <p>
+        {siteConfig.name} is a collection of focused, free tools: image conversion and compression, everyday
+        calculators (percentages, age, dates, discounts), unit converters (length, mass/weight, temperature, area),
+        and electrical calculators (Ohm's law, power, resistance, energy cost).
+      </p>
+
+      <h2>How the tools work</h2>
+      <p>
+        Calculators and unit converters run entirely in your browser — nothing you type is sent anywhere. Image
+        tools default to local, in-browser processing too, with an explicitly labelled option to upload a file to
+        our server instead, for cases where local processing isn't supported by your browser.
+      </p>
+
+      <h2>Accuracy and sourcing</h2>
+      <p>
+        Formulas used throughout this site (percentage math, unit conversion factors, Ohm's law, AC/DC power
+        equations, resistor combination rules) are standard, published formulas, referenced on each tool's page.
+        Every tool states its assumptions and limitations directly — these calculators are meant to be transparent,
+        not a black box.
+      </p>
+
+      {
+        siteConfig.operatorName ? (
+          <>
+            <h2>Who runs this site</h2>
+            <p>{siteConfig.name} is operated by {siteConfig.operatorName}.</p>
+          </>
+        ) : (
+          <>
+            <h2>Who runs this site</h2>
+            <p>
+              Operator details for this site are still being finalized and will be published here before launch.
+            </p>
+          </>
+        )
+      }
+    </div>
+  </div>
+</BaseLayout>

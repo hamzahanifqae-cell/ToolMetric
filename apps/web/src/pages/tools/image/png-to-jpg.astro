@@ -1,0 +1,47 @@
+---
+import ToolLayout from "../../../layouts/ToolLayout.astro";
+import { ConvertImageTool } from "../../../components/image/ConvertImageTool.js";
+import { getToolByPath } from "../../../content/tools.js";
+
+const tool = getToolByPath("/tools/image/png-to-jpg")!;
+---
+
+<ToolLayout
+  tool={tool}
+  description="Convert PNG images to JPG in your browser, with control over the background color used for transparent areas. No upload required."
+  purpose="Convert a PNG file to JPG. Choose a background color to fill transparent areas, since JPG does not support transparency."
+>
+  <ConvertImageTool client:load acceptAttr="image/png" acceptedLabel="PNG" outputFormat="jpeg" />
+
+  <Fragment slot="details">
+    <h2>How it works</h2>
+    <p>
+      Select a PNG file (or drag one into the box above). It's decoded in your browser, drawn onto a canvas filled
+      with your chosen background color, and re-encoded as a JPG — nothing is uploaded unless you switch to the
+      server option.
+    </p>
+
+    <h2>Worked example</h2>
+    <p>
+      A 1200×800 PNG logo with a transparent background, converted with a white background color, produces a
+      1200×800 JPG where the formerly transparent pixels are now solid white.
+    </p>
+
+    <h2>Assumptions and limitations</h2>
+    <ul>
+      <li>JPG has no transparency channel — any transparent or semi-transparent pixels are flattened onto the background color you choose.</li>
+      <li>JPG compression is lossy: some fine detail and color precision is lost, even at high quality settings. This is not reversible.</li>
+      <li>PNG metadata (such as embedded color profiles) is not preserved in the output.</li>
+      <li>Animated PNGs (APNG) are not supported — only the first frame is processed.</li>
+      <li>Very large images (beyond roughly 40 megapixels) are rejected to keep processing fast and memory-safe.</li>
+    </ul>
+
+    <h2>Local vs. server processing</h2>
+    <p>
+      By default this runs entirely on your device using the browser's Canvas API. If your browser can't complete
+      the conversion (for example, an older browser without the required APIs), you can explicitly choose "Upload to
+      our server for processing," which sends the file to our API, converts it with the Sharp image library, and
+      deletes the file afterward.
+    </p>
+  </Fragment>
+</ToolLayout>

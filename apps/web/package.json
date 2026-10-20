@@ -1,0 +1,32 @@
+{
+  "name": "@toolmetric/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "build:local": "astro check && TOOLMETRIC_ALLOW_LOCAL_BUILD=true astro build",
+    "preview": "astro preview",
+    "typecheck": "astro check",
+    "lint": "astro check",
+    "launch-check": "node --env-file-if-exists=.env scripts/launch-check.mjs"
+  },
+  "dependencies": {
+    "@toolmetric/shared": "*",
+    "@fontsource/inter": "^5.1.1",
+    "astro": "^7.4.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.11",
+    "@astrojs/react": "^7.1.0",
+    "@astrojs/sitemap": "^3.7.4",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.7.3"
+  }
+}

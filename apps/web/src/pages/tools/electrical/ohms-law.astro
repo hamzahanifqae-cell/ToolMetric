@@ -1,0 +1,44 @@
+---
+import ToolLayout from "../../../layouts/ToolLayout.astro";
+import { OhmsLawCalculator } from "../../../components/electrical/OhmsLawCalculator.js";
+import { getToolByPath } from "../../../content/tools.js";
+
+const tool = getToolByPath("/tools/electrical/ohms-law")!;
+---
+
+<ToolLayout
+  tool={tool}
+  description="Solve for voltage, current, or resistance using Ohm's law, for DC and purely resistive circuits."
+  purpose="Solve for voltage, current, or resistance given the other two values, using Ohm's law."
+>
+  <OhmsLawCalculator client:load />
+
+  <Fragment slot="details">
+    <h2>Formula</h2>
+    <p><code>V = I × R</code> (voltage = current × resistance), rearranged to solve for whichever value is missing.</p>
+
+    <h2>Worked example</h2>
+    <p>Given V = 12V and I = 2A: R = V ÷ I = 12 ÷ 2 = 6Ω. Power = V × I = 24W.</p>
+
+    <h2>DC and resistive circuits only</h2>
+    <p>
+      Ohm's law in this simple form applies to DC circuits and purely resistive AC loads. It does <strong>not</strong>
+      apply directly to AC circuits containing inductance or capacitance, where impedance (Z) — a complex quantity
+      with magnitude and phase — relates voltage and current instead of plain resistance. Use the Electrical Power
+      Calculator for AC power calculations.
+    </p>
+
+    <h2>Assumptions and limitations</h2>
+    <ul>
+      <li>Resistance of 0Ω is treated as invalid when solving for current (it would imply infinite current for any nonzero voltage).</li>
+      <li>Current of 0A is treated as invalid when solving for resistance (division by zero).</li>
+      <li>Negative resistance values are rejected as physically invalid for this calculator.</li>
+    </ul>
+
+    <h2>Reference</h2>
+    <p>
+      Ohm's law and the volt, ampere, ohm, and watt are defined within the International System of Units (SI), as
+      maintained by NIST and the Bureau International des Poids et Mesures (BIPM).
+    </p>
+  </Fragment>
+</ToolLayout>

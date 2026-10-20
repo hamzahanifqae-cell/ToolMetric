@@ -1,0 +1,43 @@
+---
+import ToolLayout from "../../../layouts/ToolLayout.astro";
+import { CompressorTool } from "../../../components/image/CompressorTool.js";
+import { getToolByPath } from "../../../content/tools.js";
+
+const tool = getToolByPath("/tools/image/compressor")!;
+---
+
+<ToolLayout
+  tool={tool}
+  description="Reduce image file size with an adjustable JPEG or WebP quality slider, processed in your browser."
+  purpose="Reduce a PNG, JPG, or WebP image's file size by re-encoding it as JPEG or WebP at an adjustable quality level."
+>
+  <CompressorTool client:load />
+
+  <Fragment slot="details">
+    <h2>How it works</h2>
+    <p>
+      Select an image and a target format (JPEG or WebP), then adjust the quality slider. Lower quality produces a
+      smaller file at the cost of visible compression artifacts (blurring, blockiness, or color banding).
+    </p>
+
+    <h2>Worked example</h2>
+    <p>
+      A 3 MB PNG photo compressed to JPEG at quality 75 might result in a 300–500 KB file with little visible
+      difference; at quality 20, the file shrinks further but artifacts become noticeable.
+    </p>
+
+    <h2>Assumptions and limitations</h2>
+    <ul>
+      <li>Quality settings influence file size but do not guarantee a specific output size — the relationship depends on image content.</li>
+      <li>This is lossy compression: reduced quality is not reversible, and repeated recompression compounds quality loss.</li>
+      <li>PNG output is not offered here because PNG compression is lossless and doesn't have a comparable "quality" tradeoff — use the Image Resizer or a dedicated PNG optimizer for that.</li>
+      <li>Transparent areas are filled with your chosen background color only when compressing to JPEG (WebP keeps transparency).</li>
+    </ul>
+
+    <h2>Local vs. server processing</h2>
+    <p>
+      Compression runs on your device by default. The explicit server option re-encodes the file with Sharp on our
+      API and deletes it afterward.
+    </p>
+  </Fragment>
+</ToolLayout>

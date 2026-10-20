@@ -1,0 +1,35 @@
+---
+import ToolLayout from "../../../layouts/ToolLayout.astro";
+import { AreaConverter } from "../../../components/converters/AreaConverter.js";
+import { getToolByPath } from "../../../content/tools.js";
+
+const tool = getToolByPath("/tools/converters/area")!;
+---
+
+<ToolLayout
+  tool={tool}
+  description="Convert between square meters, square feet, acres, hectares, square miles, and more."
+  purpose="Convert an area value between metric and imperial/US customary units."
+>
+  <AreaConverter client:load />
+
+  <Fragment slot="details">
+    <h2>How it works</h2>
+    <p>
+      Every unit is converted through square meters as a common base, then into your target unit, so every
+      conversion pair stays mathematically consistent.
+    </p>
+
+    <h2>Worked example</h2>
+    <p>1 acre = 4,046.86 square meters = 0.4047 hectares. 1 square meter = 10.7639 square feet.</p>
+
+    <h2>Assumptions and limitations</h2>
+    <ul>
+      <li>Conversion factors use standard international definitions (e.g. 1 acre = 4,046.8564224 m² exactly).</li>
+      <li>Results are rounded for display; internal calculations retain full floating-point precision.</li>
+    </ul>
+
+    <h2>Reference</h2>
+    <p>Area conversion factors follow NIST Handbook 44, the standard US reference for weights and measures.</p>
+  </Fragment>
+</ToolLayout>

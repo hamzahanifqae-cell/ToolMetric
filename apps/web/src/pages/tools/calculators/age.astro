@@ -1,0 +1,44 @@
+---
+import ToolLayout from "../../../layouts/ToolLayout.astro";
+import { AgeCalculator } from "../../../components/calculators/AgeCalculator.js";
+import { getToolByPath } from "../../../content/tools.js";
+
+const tool = getToolByPath("/tools/calculators/age")!;
+---
+
+<ToolLayout
+  tool={tool}
+  description="Calculate exact age in years, months, and days from a birth date, plus total days lived and days until the next birthday."
+  purpose="Calculate a person's exact age as of today or any other date, broken down into years, months, and days."
+>
+  <AgeCalculator client:load />
+
+  <Fragment slot="details">
+    <h2>How it's calculated</h2>
+    <p>
+      The calculator counts whole calendar years, then whole months, then whole days between the birth date and the
+      "as of" date — the same way most people count age by hand. Dates are compared as calendar dates only (no time
+      zone is applied), so the result doesn't shift depending on where you are in the world.
+    </p>
+
+    <h2>Worked example</h2>
+    <p>
+      Someone born on June 15, 2000, measured as of January 15, 2024, is 23 years, 7 months, and 0 days old — the
+      birthday for 2024 hasn't occurred yet relative to January, so the year count hasn't incremented.
+    </p>
+
+    <h2>Leap-day birthdays</h2>
+    <p>
+      For a birth date of February 29, this tool observes the anniversary on February 28 in years that aren't leap
+      years, and on February 29 in years that are. This is one reasonable convention (the one most civil
+      recordkeeping systems use); it is not the only valid interpretation.
+    </p>
+
+    <h2>Assumptions and limitations</h2>
+    <ul>
+      <li>The birth date must be on or before the "as of" date.</li>
+      <li>Calculations use calendar dates (YYYY-MM-DD) with no time-of-day component, so results are identical regardless of your local time zone.</li>
+      <li>"Total days lived" counts whole 24-hour calendar days between the two dates.</li>
+    </ul>
+  </Fragment>
+</ToolLayout>

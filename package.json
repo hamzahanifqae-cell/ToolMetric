@@ -1,0 +1,29 @@
+{
+  "name": "toolmetric",
+  "private": true,
+  "version": "0.1.0",
+  "description": "ToolMetric monorepo: web app, API service, and shared calculation modules.",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run build -w @toolmetric/shared && concurrently -k -n api,web -c blue,green \"npm run dev -w @toolmetric/api\" \"npm run dev -w @toolmetric/web\"",
+    "dev:web": "npm run dev -w @toolmetric/web",
+    "dev:api": "npm run dev -w @toolmetric/api",
+    "build": "npm run build -w @toolmetric/shared && npm run build -w @toolmetric/api && npm run build -w @toolmetric/web",
+    "build:local": "npm run build -w @toolmetric/shared && npm run build -w @toolmetric/api && npm run build:local -w @toolmetric/web",
+    "build:shared": "npm run build -w @toolmetric/shared",
+    "test": "npm run build -w @toolmetric/shared && npm run test -w @toolmetric/shared && npm run test -w @toolmetric/api",
+    "typecheck": "npm run typecheck -w @toolmetric/shared && npm run typecheck -w @toolmetric/api && npm run typecheck -w @toolmetric/web",
+    "lint": "npm run lint -w @toolmetric/web",
+    "launch-check": "npm run build -w @toolmetric/shared && npm run launch-check -w @toolmetric/web"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

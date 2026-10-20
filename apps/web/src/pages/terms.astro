@@ -1,0 +1,58 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { siteConfig } from "../config/site.js";
+---
+
+<BaseLayout title="Terms of Use" description={`Terms for using ${siteConfig.name}'s tools.`}>
+  <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6">
+    <Breadcrumbs items={[{ label: "Terms of Use" }]} />
+    <h1 class="text-2xl font-bold text-navy-900 sm:text-3xl">Terms of Use</h1>
+
+    <div class="prose-tool mt-6">
+      <h2>What this site provides</h2>
+      <p>
+        {siteConfig.name} provides free image tools, calculators, unit converters, and electrical calculators for
+        informational and general-purpose use. Results are provided "as is," without warranty of any kind.
+      </p>
+
+      <h2>Not professional advice</h2>
+      <p>
+        Nothing on this site is professional, legal, financial, or engineering advice. In particular, the
+        electrical calculators do not determine safe wiring, breaker sizing, or compliance with any electrical
+        code — consult a qualified electrician and your local code for that. Always verify important calculations
+        independently before relying on them.
+      </p>
+
+      <h2>Acceptable use</h2>
+      <p>You agree not to:</p>
+      <ul>
+        <li>Use automated tools to send excessive or abusive traffic to the image-processing API.</li>
+        <li>Upload files you do not have the right to process, or files containing unlawful content.</li>
+        <li>Attempt to circumvent rate limits, upload size limits, or other technical safeguards on this site.</li>
+      </ul>
+
+      <h2>No accounts, no stored personal data</h2>
+      <p>
+        This site does not require an account and does not maintain a user database. See the <a href="/privacy">Privacy
+        Policy</a> for how image files are handled when you choose server-side processing.
+      </p>
+
+      <h2>Limitation of liability</h2>
+      <p>
+        To the fullest extent permitted by law, {siteConfig.name} and its operator are not liable for any damages
+        arising from use of, or inability to use, this site or its calculations.
+      </p>
+
+      <h2>Governing law</h2>
+      <p>
+        This section intentionally has no content yet: the governing law and jurisdiction for these terms depend on
+        where the operator is based and where the site is hosted, neither of which this codebase can determine or
+        invent on its own. The site operator needs to add this before the terms are considered complete.
+      </p>
+
+      <h2>Changes</h2>
+      <p>These terms may be updated from time to time. Continued use of the site after changes constitutes acceptance of the updated terms.</p>
+    </div>
+  </div>
+</BaseLayout>

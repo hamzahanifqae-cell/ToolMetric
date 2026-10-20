@@ -1,0 +1,45 @@
+---
+import ToolLayout from "../../../layouts/ToolLayout.astro";
+import { PercentageCalculator } from "../../../components/calculators/PercentageCalculator.js";
+import { getToolByPath } from "../../../content/tools.js";
+
+const tool = getToolByPath("/tools/calculators/percentage")!;
+---
+
+<ToolLayout
+  tool={tool}
+  description="Calculate X% of Y, what percent X is of Y, or the percentage change between two values."
+  purpose="Three common percentage calculations in one tool: a percentage of a value, what percent one value is of another, and percentage change."
+>
+  <PercentageCalculator client:load />
+
+  <Fragment slot="details">
+    <h2>Formulas</h2>
+    <ul>
+      <li><code>X% of Y = (X ÷ 100) × Y</code></li>
+      <li><code>X is what % of Y = (X ÷ Y) × 100</code></li>
+      <li><code>Percentage change = ((New − Original) ÷ |Original|) × 100</code></li>
+    </ul>
+
+    <h2>Worked examples</h2>
+    <ul>
+      <li>20% of 150 = (20 ÷ 100) × 150 = 30.</li>
+      <li>30 is what percent of 150? (30 ÷ 150) × 100 = 20%.</li>
+      <li>A price moving from 150 to 180 is a change of ((180 − 150) ÷ 150) × 100 = +20% (an increase).</li>
+    </ul>
+
+    <h2>Assumptions and limitations</h2>
+    <ul>
+      <li>"X is what percent of Y" is undefined when Y is 0 (division by zero) — the tool reports this rather than showing a misleading number.</li>
+      <li>
+        Percentage change divides by the original value, so it is mathematically undefined whenever that value is 0
+        — including when the new value is also 0 (0 ÷ 0 is indeterminate, not "0%"). When both values are exactly 0,
+        this tool reports 0% / "no change" anyway, as a deliberate product choice (nothing changed numerically, so
+        an "undefined" error would be more confusing than helpful) — not because mathematics requires that answer.
+        For any other case where the original value is 0, the result is reported as undefined rather than a
+        fabricated number.
+      </li>
+      <li>Results are shown rounded to a readable number of decimal places; internal calculations use full floating-point precision.</li>
+    </ul>
+  </Fragment>
+</ToolLayout>

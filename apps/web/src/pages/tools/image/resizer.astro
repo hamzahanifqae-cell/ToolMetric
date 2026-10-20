@@ -1,0 +1,43 @@
+---
+import ToolLayout from "../../../layouts/ToolLayout.astro";
+import { ResizerTool } from "../../../components/image/ResizerTool.js";
+import { getToolByPath } from "../../../content/tools.js";
+
+const tool = getToolByPath("/tools/image/resizer")!;
+---
+
+<ToolLayout
+  tool={tool}
+  description="Resize an image to exact dimensions in your browser, with an optional aspect-ratio lock."
+  purpose="Resize a PNG, JPG, or WebP image to a target width and/or height, optionally keeping its original aspect ratio."
+>
+  <ResizerTool client:load />
+
+  <Fragment slot="details">
+    <h2>How it works</h2>
+    <p>
+      Enter a target width, height, or both. With "Lock aspect ratio" checked and only one dimension entered, the
+      other is calculated automatically; with both entered, the image is scaled to fit inside that box without
+      distortion. Unchecking the lock stretches the image to the exact dimensions you enter.
+    </p>
+
+    <h2>Worked example</h2>
+    <p>
+      A 1600×900 image resized to a width of 800 with aspect ratio locked produces an 800×450 output. The same image
+      resized to exactly 800×800 with the lock unchecked produces an 800×800 output that is stretched vertically.
+    </p>
+
+    <h2>Assumptions and limitations</h2>
+    <ul>
+      <li>Output dimensions are capped (currently 10,000px per side) to avoid excessive memory use.</li>
+      <li>Resizing up (enlarging) is supported but can make an image look soft or blurry, since no new detail is created.</li>
+      <li>Choosing JPEG output flattens transparency onto your chosen background color; PNG and WebP preserve it.</li>
+    </ul>
+
+    <h2>Local vs. server processing</h2>
+    <p>
+      Resizing runs on your device by default, using the browser's Canvas API. The explicit server option resizes
+      the file with Sharp on our API and deletes it afterward.
+    </p>
+  </Fragment>
+</ToolLayout>

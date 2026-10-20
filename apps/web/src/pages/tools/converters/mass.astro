@@ -1,0 +1,39 @@
+---
+import ToolLayout from "../../../layouts/ToolLayout.astro";
+import { MassConverter } from "../../../components/converters/MassConverter.js";
+import { getToolByPath } from "../../../content/tools.js";
+
+const tool = getToolByPath("/tools/converters/mass")!;
+---
+
+<ToolLayout
+  tool={tool}
+  description="Convert between milligrams, grams, kilograms, tonnes, ounces, pounds, and stone."
+  purpose="Convert a mass/weight value between metric and imperial units."
+>
+  <MassConverter client:load />
+
+  <Fragment slot="details">
+    <h2>Why "mass / weight"?</h2>
+    <p>
+      Technically, mass (kilograms, pounds) and weight (a force) are different physical quantities, but in everyday
+      language "weight" almost always means mass — how much something weighs on a kitchen or bathroom scale. This
+      tool converts mass units, labelled as "mass / weight" to match how people actually search for it.
+    </p>
+
+    <h2>Worked example</h2>
+    <p>1 kilogram = 2.20462 pounds. 1 stone = 6.35029 kilograms.</p>
+
+    <h2>Assumptions and limitations</h2>
+    <ul>
+      <li>Conversion factors use standard international definitions (e.g. 1 pound = 0.45359237 kilograms exactly).</li>
+      <li>This tool does not account for local variations in gravity, which would matter only for true weight-as-force calculations, not everyday mass conversions.</li>
+    </ul>
+
+    <h2>Reference</h2>
+    <p>
+      The pound-to-kilogram conversion (1 lb = 0.45359237 kg) is the internationally agreed exact value from the
+      1959 International Yard and Pound Agreement, as documented in NIST Handbook 44.
+    </p>
+  </Fragment>
+</ToolLayout>

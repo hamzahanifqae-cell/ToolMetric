@@ -1,0 +1,43 @@
+---
+import ToolLayout from "../../../layouts/ToolLayout.astro";
+import { ConvertImageTool } from "../../../components/image/ConvertImageTool.js";
+import { getToolByPath } from "../../../content/tools.js";
+
+const tool = getToolByPath("/tools/image/to-webp")!;
+---
+
+<ToolLayout
+  tool={tool}
+  description="Convert JPG or PNG images to WebP in your browser for smaller file sizes. No upload required."
+  purpose="Convert a JPG or PNG file to the modern WebP format, which typically produces smaller files at comparable visual quality."
+>
+  <ConvertImageTool client:load acceptAttr="image/jpeg,image/png" acceptedLabel="JPG or PNG" outputFormat="webp" />
+
+  <Fragment slot="details">
+    <h2>How it works</h2>
+    <p>
+      Select a JPG or PNG file. It's decoded in your browser and re-encoded as WebP using the Canvas API — nothing
+      is uploaded unless you switch to the server option. Transparency from PNG inputs is preserved.
+    </p>
+
+    <h2>Worked example</h2>
+    <p>
+      A 2000×1500 JPG photo saved at typical quality is often 30–50% smaller as a WebP at a visually similar
+      quality, though the exact savings depend heavily on the image content.
+    </p>
+
+    <h2>Assumptions and limitations</h2>
+    <ul>
+      <li>WebP compression here is lossy; it is not a lossless re-encode of your original file.</li>
+      <li>Quality settings influence file size but do not guarantee a specific output size — results vary by image content.</li>
+      <li>Not every older browser can decode or encode WebP; if conversion fails locally, use the server option instead.</li>
+      <li>Animated inputs are not supported — only a single static image is produced.</li>
+    </ul>
+
+    <h2>Local vs. server processing</h2>
+    <p>
+      This runs on your device by default. The explicit "Upload to our server for processing" option sends the file
+      to our API (built with Sharp) and deletes it afterward — useful as a fallback if local processing fails.
+    </p>
+  </Fragment>
+</ToolLayout>

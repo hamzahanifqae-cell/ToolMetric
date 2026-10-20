@@ -1,0 +1,39 @@
+---
+import ToolLayout from "../../../layouts/ToolLayout.astro";
+import { LengthConverter } from "../../../components/converters/LengthConverter.js";
+import { getToolByPath } from "../../../content/tools.js";
+
+const tool = getToolByPath("/tools/converters/length")!;
+---
+
+<ToolLayout
+  tool={tool}
+  description="Convert between millimeters, centimeters, meters, kilometers, inches, feet, yards, and miles."
+  purpose="Convert a length or distance value between metric and imperial units."
+>
+  <LengthConverter client:load />
+
+  <Fragment slot="details">
+    <h2>How it works</h2>
+    <p>
+      Every unit is converted through meters as a common base (e.g. 1 inch = 0.0254 meters, per the international
+      yard-and-pound agreement), then from meters into your target unit. This two-step approach keeps every
+      conversion pair mathematically consistent.
+    </p>
+
+    <h2>Worked example</h2>
+    <p>1 meter = 3.28084 feet. 10 miles = 16.09344 kilometers.</p>
+
+    <h2>Assumptions and limitations</h2>
+    <ul>
+      <li>Conversion factors use standard SI/imperial definitions and are exact to the precision shown.</li>
+      <li>Results are rounded for display; very large or very small values may show fewer significant digits due to floating-point precision limits inherent to JavaScript numbers.</li>
+    </ul>
+
+    <h2>Reference</h2>
+    <p>
+      Conversion factors follow NIST Special Publication 811 (<em>Guide for the Use of the International System of
+      Units</em>) and NIST Handbook 44, the standard references for SI and customary unit conversions in the US.
+    </p>
+  </Fragment>
+</ToolLayout>

@@ -1,0 +1,40 @@
+---
+import ToolLayout from "../../../layouts/ToolLayout.astro";
+import { EnergyCostCalculator } from "../../../components/electrical/EnergyCostCalculator.js";
+import { getToolByPath } from "../../../content/tools.js";
+
+const tool = getToolByPath("/tools/electrical/energy-cost")!;
+---
+
+<ToolLayout
+  tool={tool}
+  description="Estimate kWh energy consumption and cost from power, usage time, and your own electricity rate."
+  purpose="Estimate the energy consumed (in kWh) and its approximate cost, based on a device's power, how long it runs, and your electricity rate."
+>
+  <EnergyCostCalculator client:load />
+
+  <Fragment slot="details">
+    <h2>Formula</h2>
+    <ul>
+      <li><code>kWh = (Watts × Hours) ÷ 1000</code></li>
+      <li><code>Cost = kWh × your rate per kWh</code></li>
+    </ul>
+
+    <h2>Worked example</h2>
+    <p>
+      A 1,500W heater run for 4 hours: kWh = (1,500 × 4) ÷ 1000 = 6 kWh. At a rate of $0.15/kWh, estimated cost = 6
+      × 0.15 = $0.90.
+    </p>
+
+    <h2>Assumptions and limitations</h2>
+    <ul>
+      <li>You enter your own electricity rate and currency symbol — this tool does not look up or assume any specific tariff.</li>
+      <li>The estimate excludes taxes, fixed/standing charges, tiered pricing, and time-of-use rates unless you've already folded those into the rate you entered.</li>
+      <li>This assumes constant power draw for the full duration entered; many real devices (e.g. appliances with compressors or thermostats) draw variable power over time, which this simple model doesn't capture.</li>
+      <li>Results do not determine safe wiring, breaker sizing, or electrical code compliance.</li>
+    </ul>
+
+    <h2>Reference</h2>
+    <p>The kilowatt-hour (kWh) is a non-SI unit accepted for use with the International System of Units, as recognized by NIST and used by utilities worldwide for billing energy consumption.</p>
+  </Fragment>
+</ToolLayout>

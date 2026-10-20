@@ -1,0 +1,54 @@
+---
+import { CATEGORIES } from "../content/tools.js";
+import { siteConfig } from "../config/site.js";
+
+const year = new Date().getFullYear();
+const navItems = Object.values(CATEGORIES);
+---
+
+<footer class="border-t border-sand-200 bg-navy-950 text-sand-100">
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <div class="grid gap-8 sm:grid-cols-3">
+      <div>
+        <p class="text-base font-bold text-white">{siteConfig.name}</p>
+        <p class="mt-2 max-w-xs text-sm text-sand-300">
+          Image tools, everyday calculators, unit converters, and electrical calculators. Calculations run in your
+          browser; image tools offer an explicit local or server option.
+        </p>
+      </div>
+
+      <div>
+        <p class="text-sm font-semibold text-white">Categories</p>
+        <ul class="mt-3 space-y-2 text-sm">
+          {
+            navItems.map((cat) => (
+              <li>
+                <a href={cat.path} class="text-sand-300 hover:text-teal-300">
+                  {cat.label}
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <a href="/tools" class="text-sand-300 hover:text-teal-300">
+              All Tools
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-sm font-semibold text-white">Company</p>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a href="/about" class="text-sand-300 hover:text-teal-300">About</a></li>
+          <li><a href="/privacy" class="text-sand-300 hover:text-teal-300">Privacy Policy</a></li>
+          <li><a href="/terms" class="text-sand-300 hover:text-teal-300">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-8 border-t border-navy-800 pt-6 text-xs text-sand-400">
+      <p>&copy; {year} {siteConfig.name}. All calculations are provided for informational purposes only.</p>
+    </div>
+  </div>
+</footer>

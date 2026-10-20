@@ -1,0 +1,33 @@
+---
+import ToolLayout from "../../../layouts/ToolLayout.astro";
+import { DiscountCalculator } from "../../../components/calculators/DiscountCalculator.js";
+import { getToolByPath } from "../../../content/tools.js";
+
+const tool = getToolByPath("/tools/calculators/discount")!;
+---
+
+<ToolLayout
+  tool={tool}
+  description="Calculate the final price and amount saved after applying a percentage discount."
+  purpose="Calculate the final price of an item after a percentage discount, and how much you save."
+>
+  <DiscountCalculator client:load />
+
+  <Fragment slot="details">
+    <h2>Formula</h2>
+    <ul>
+      <li><code>Discount amount = Original price × (Discount % ÷ 100)</code></li>
+      <li><code>Final price = Original price − Discount amount</code></li>
+    </ul>
+
+    <h2>Worked example</h2>
+    <p>An $80 item at 25% off: discount amount = 80 × 0.25 = $20; final price = 80 − 20 = $60.</p>
+
+    <h2>Assumptions and limitations</h2>
+    <ul>
+      <li>Discount percentage is restricted to 0–100% in this tool. A 100% discount results in a final price of $0.</li>
+      <li>This calculator does not apply tax or additional fees — it works on the price and discount you enter.</li>
+      <li>Currency is not assumed; enter your price in whatever currency you're working with, and the result will be in the same units.</li>
+    </ul>
+  </Fragment>
+</ToolLayout>

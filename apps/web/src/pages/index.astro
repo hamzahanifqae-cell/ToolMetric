@@ -1,0 +1,87 @@
+---
+import { ToolCard } from "../components/ToolCard.js";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { CATEGORIES, TOOLS } from "../content/tools.js";
+import { siteConfig } from "../config/site.js";
+
+const featuredPaths = [
+  "/tools/image/compressor",
+  "/tools/calculators/percentage",
+  "/tools/converters/temperature",
+  "/tools/electrical/ohms-law",
+  "/tools/calculators/age",
+  "/tools/image/resizer",
+];
+const featured = featuredPaths.map((p) => TOOLS.find((t) => t.path === p)).filter(Boolean);
+const categories = Object.values(CATEGORIES);
+---
+
+<BaseLayout
+  title={siteConfig.name}
+  description="Free image tools, everyday calculators, unit converters, and electrical calculators. Most calculations run locally in your browser."
+>
+  <section class="home-hero">
+    <div class="hero-shell">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> YOUR EVERYDAY TOOLKIT</p>
+        <h1>Small tasks.<br/><span>Sorted.</span></h1>
+        <p class="hero-description">Convert an image. Work out the numbers. Find the right units. Practical tools that get you straight to the answer.</p>
+        <div class="hero-actions"><a href="/tools" class="primary-action">Find your tool <span aria-hidden="true">↓</span></a><a href="/tools" class="secondary-action">Explore all {TOOLS.length} tools ↗</a></div>
+        <div class="hero-notes"><span>✓ No account needed</span><span>✓ Free to use</span></div>
+      </div>
+      <div class="hero-workbench" aria-label="Featured tool shortcuts">
+        <div class="workbench-top"><span class="workbench-symbol" aria-hidden="true">⌘</span><span>Less effort. More done.</span><span class="workbench-tag">TOOLKIT</span></div>
+        <a class="workbench-feature" href="/tools/image/compressor"><span class="visual-icon" aria-hidden="true">▧</span><div><span class="mini-label">MAKE ROOM FOR MORE</span><h2>Smaller images.<br/>Ready to share.</h2><span class="feature-link">Open image compressor ↗</span></div></a>
+        <div class="workbench-pair"><a href="/tools/calculators/percentage"><span class="pair-symbol" aria-hidden="true">%</span><strong>Numbers, simplified.</strong><span>Percentage calculator ↗</span></a><a href="/tools/electrical/ohms-law"><span class="pair-symbol" aria-hidden="true">Ω</span><strong>Make the connection.</strong><span>Ohm’s law calculator ↗</span></a></div>
+        <div class="workbench-bottom"><span>Built for the task at hand</span><span>01 — 18</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <h2 class="text-xl font-bold text-navy-900">A good place to start</h2>
+    <ul class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        featured.map((tool) => (
+          <li>
+            <ToolCard title={tool!.title} href={tool!.path} category={tool!.category} icon={tool!.slug} />
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="border-t border-sand-200 bg-sand-50">
+    <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+      <h2 class="text-xl font-bold text-navy-900">The right tools, together.</h2>
+      <div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          categories.map((cat) => (
+            <ToolCard title={cat.label} href={cat.path} category={cat.key} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-4xl px-4 py-12 sm:px-6">
+    <h2 class="text-xl font-bold text-navy-900">How processing works</h2>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      <div class="rounded-lg border border-sand-200 bg-white p-5">
+        <p class="font-semibold text-navy-900">Calculators and converters</p>
+        <p class="mt-2 text-sm text-navy-600">
+          All percentage, age, date, unit, and electrical calculations run entirely in your browser using JavaScript.
+          No values you enter are sent to a server.
+        </p>
+      </div>
+      <div class="rounded-lg border border-sand-200 bg-white p-5">
+        <p class="font-semibold text-navy-900">Image tools</p>
+        <p class="mt-2 text-sm text-navy-600">
+          Image conversion, compression, and resizing default to processing on your device. Each image tool also
+          offers an explicitly labelled option to upload the file to our server instead, which is useful if your
+          browser doesn't support a particular operation.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

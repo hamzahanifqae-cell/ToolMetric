@@ -1,0 +1,42 @@
+---
+import ToolLayout from "../../../layouts/ToolLayout.astro";
+import { ConvertImageTool } from "../../../components/image/ConvertImageTool.js";
+import { getToolByPath } from "../../../content/tools.js";
+
+const tool = getToolByPath("/tools/image/webp-to-jpg")!;
+---
+
+<ToolLayout
+  tool={tool}
+  description="Convert WebP images to JPG in your browser, with control over the background color used for transparency. No upload required."
+  purpose="Convert a WebP file to JPG. Choose a background color to fill transparent areas, since JPG does not support transparency."
+>
+  <ConvertImageTool client:load acceptAttr="image/webp" acceptedLabel="WebP" outputFormat="jpeg" />
+
+  <Fragment slot="details">
+    <h2>How it works</h2>
+    <p>
+      Select a WebP file. It's decoded in your browser, flattened onto your chosen background color, and re-encoded
+      as JPG — nothing is uploaded unless you switch to the server option.
+    </p>
+
+    <h2>Worked example</h2>
+    <p>
+      A WebP product photo with a transparent corner, converted with a white background, produces a JPG with solid
+      white filling that corner.
+    </p>
+
+    <h2>Assumptions and limitations</h2>
+    <ul>
+      <li>JPG has no transparency channel — transparent or semi-transparent pixels are flattened onto the background color you choose.</li>
+      <li>JPG compression is lossy and not reversible; some detail is lost even at high quality.</li>
+      <li>Only the first frame of an animated WebP is converted.</li>
+    </ul>
+
+    <h2>Local vs. server processing</h2>
+    <p>
+      This runs on your device by default. The explicit server option uploads the file to our API (using Sharp) and
+      deletes it afterward — useful if local decoding fails.
+    </p>
+  </Fragment>
+</ToolLayout>

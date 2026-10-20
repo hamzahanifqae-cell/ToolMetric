@@ -1,0 +1,20 @@
+---
+import { ToolCard } from "./ToolCard.js";
+import type { ToolMeta } from "../content/tools.js";
+
+interface Props {
+  tools: ToolMeta[];
+}
+
+const { tools } = Astro.props;
+---
+
+<ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  {
+    tools.map((tool) => (
+      <li>
+        <ToolCard title={tool.title} href={tool.path} category={tool.category} icon={tool.slug} />
+      </li>
+    ))
+  }
+</ul>

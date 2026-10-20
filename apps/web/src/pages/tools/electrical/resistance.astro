@@ -1,0 +1,39 @@
+---
+import ToolLayout from "../../../layouts/ToolLayout.astro";
+import { ResistanceCalculator } from "../../../components/electrical/ResistanceCalculator.js";
+import { getToolByPath } from "../../../content/tools.js";
+
+const tool = getToolByPath("/tools/electrical/resistance")!;
+---
+
+<ToolLayout
+  tool={tool}
+  description="Calculate total resistance for any number of resistors combined in series or in parallel."
+  purpose="Calculate the total resistance of two or more resistors connected in series or in parallel."
+>
+  <ResistanceCalculator client:load />
+
+  <Fragment slot="details">
+    <h2>Formulas</h2>
+    <ul>
+      <li>Series: <code>R_total = R1 + R2 + ... + Rn</code></li>
+      <li>Parallel: <code>1 / R_total = 1/R1 + 1/R2 + ... + 1/Rn</code></li>
+    </ul>
+
+    <h2>Worked examples</h2>
+    <ul>
+      <li>Series: 100Ω + 220Ω = 320Ω.</li>
+      <li>Parallel: two 10Ω resistors → 1/R_total = 1/10 + 1/10 = 1/5 → R_total = 5Ω.</li>
+    </ul>
+
+    <h2>Assumptions and limitations</h2>
+    <ul>
+      <li>This applies to pure resistance (DC or resistive AC loads). For AC circuits with reactive components (inductors/capacitors), impedances combine as complex numbers, not as simple scalar sums or reciprocals.</li>
+      <li>A 0Ω resistor in a parallel combination short-circuits it, so the total resistance is exactly 0Ω — this is handled explicitly rather than causing a calculation error.</li>
+      <li>Negative resistance values are rejected as physically invalid for this calculator.</li>
+    </ul>
+
+    <h2>Reference</h2>
+    <p>Series and parallel resistor combination rules are standard circuit-theory results derived directly from Ohm's law and Kirchhoff's circuit laws.</p>
+  </Fragment>
+</ToolLayout>

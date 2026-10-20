@@ -1,0 +1,52 @@
+---
+import ToolLayout from "../../../layouts/ToolLayout.astro";
+import { PowerCalculator } from "../../../components/electrical/PowerCalculator.js";
+import { getToolByPath } from "../../../content/tools.js";
+
+const tool = getToolByPath("/tools/electrical/power")!;
+---
+
+<ToolLayout
+  tool={tool}
+  description="Calculate real power for DC, single-phase AC, and balanced three-phase AC circuits, with correct power factor handling."
+  purpose="Calculate real (active) electrical power for DC, single-phase AC, or balanced three-phase AC circuits."
+>
+  <PowerCalculator client:load />
+
+  <Fragment slot="details">
+    <h2>Formulas</h2>
+    <ul>
+      <li>DC: <code>P = V × I</code></li>
+      <li>Single-phase AC: <code>P = V × I × PF</code></li>
+      <li>Balanced three-phase AC: <code>P = √3 × V_line-to-line × I_line × PF</code></li>
+    </ul>
+
+    <h2>Worked examples</h2>
+    <ul>
+      <li>DC: 12V at 2A → P = 12 × 2 = 24W.</li>
+      <li>Single-phase AC: 230V at 10A, PF 0.9 → P = 230 × 10 × 0.9 = 2,070W.</li>
+      <li>Three-phase AC: 400V line-to-line, 10A line current, PF 1.0 → P = √3 × 400 × 10 × 1.0 ≈ 6,928W.</li>
+    </ul>
+
+    <h2>Important distinctions</h2>
+    <ul>
+      <li>AC voltage and current inputs are assumed to be RMS (root-mean-square) values — the standard convention for AC power calculations, not peak or peak-to-peak.</li>
+      <li>For three-phase mode, enter the line-to-line voltage (between any two phases) and the line current — not the per-phase (line-to-neutral) voltage.</li>
+      <li>Power factor (PF) must be greater than 0 and no more than 1, and only applies to AC modes — DC calculations don't use it.</li>
+      <li>This calculates real (active) power in watts, not apparent power (VA) or reactive power (VAR).</li>
+    </ul>
+
+    <h2>Assumptions and limitations</h2>
+    <ul>
+      <li>This tool assumes a balanced three-phase load (equal current and power factor on all three phases). Unbalanced loads require phase-by-phase calculation, which this tool does not perform.</li>
+      <li>Results do not determine safe wiring, breaker sizing, or electrical code compliance — consult a qualified electrician and your local electrical code for that.</li>
+    </ul>
+
+    <h2>Reference</h2>
+    <p>
+      The single-phase and balanced three-phase real-power formulas (including the √3 factor for three-phase
+      line-to-line measurements) are standard AC power equations, as presented in IEEE Std 141 (the "IEEE Red Book"
+      on electric power distribution for industrial plants).
+    </p>
+  </Fragment>
+</ToolLayout>

@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { ToolSearch } from "../components/ToolSearch.js";
+---
+
+<BaseLayout title="Page not found" description="The page you're looking for doesn't exist." index={false}>
+  <div class="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
+    <p class="text-sm font-semibold uppercase tracking-wide text-teal-700">404</p>
+    <h1 class="mt-2 text-2xl font-bold text-navy-900 sm:text-3xl">We couldn't find that page</h1>
+    <p class="mt-2 text-navy-600">The link may be outdated, or the page may have moved. Try searching for a tool below.</p>
+    <div class="mx-auto mt-8 max-w-xl text-left">
+      <ToolSearch client:load />
+    </div>
+  </div>
+</BaseLayout>

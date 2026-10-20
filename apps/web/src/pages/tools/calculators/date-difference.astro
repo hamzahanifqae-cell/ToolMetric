@@ -1,0 +1,38 @@
+---
+import ToolLayout from "../../../layouts/ToolLayout.astro";
+import { DateDifferenceCalculator } from "../../../components/calculators/DateDifferenceCalculator.js";
+import { getToolByPath } from "../../../content/tools.js";
+
+const tool = getToolByPath("/tools/calculators/date-difference")!;
+---
+
+<ToolLayout
+  tool={tool}
+  description="Find the number of days, weeks, months, and years between two dates."
+  purpose="Calculate the duration between two dates in days, weeks, months, and years."
+>
+  <DateDifferenceCalculator client:load />
+
+  <Fragment slot="details">
+    <h2>Date inclusion rule</h2>
+    <p>
+      This tool reports the number of days <em>between</em> two dates — an "exclusive" count, like counting nights
+      between a check-in and check-out date. January 1 to January 2 is reported as 1 day, not 2. If you need an
+      "inclusive" count where both endpoints are counted, add 1 to the total days shown.
+    </p>
+
+    <h2>Worked example</h2>
+    <p>
+      From January 1, 2024 to December 31, 2024 is 365 days (2024 is a leap year, but Feb 29 falls inside this
+      range and is already counted correctly since the calculation works from actual calendar dates, not a fixed
+      365-day assumption).
+    </p>
+
+    <h2>Assumptions and limitations</h2>
+    <ul>
+      <li>If the end date is earlier than the start date, the tool still works — it swaps them before calculating, so the result is always a positive difference.</li>
+      <li>Dates are compared as calendar dates only, with no time zone applied, so results don't depend on your location.</li>
+      <li>The years/months/days breakdown uses calendar arithmetic (e.g. "1 month" can represent 28–31 days depending on which months are spanned).</li>
+    </ul>
+  </Fragment>
+</ToolLayout>

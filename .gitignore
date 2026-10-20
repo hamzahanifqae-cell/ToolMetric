@@ -1,0 +1,13 @@
+node_modules/
+dist/
+build/
+.astro/
+.env
+.env.local
+*.log
+.DS_Store
+coverage/
+tmp/
+apps/api/tmp-uploads/
+.vercel/
+.netlify/
