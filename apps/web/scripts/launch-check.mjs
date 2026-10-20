@@ -19,17 +19,25 @@ function readEnv(key) {
 
 const urlCheck = validateProductionUrl(readEnv("PUBLIC_SITE_URL"));
 const operatorName = readEnv("PUBLIC_OPERATOR_NAME");
-const emailCheck = validateOperatorEmail(readEnv("PUBLIC_OPERATOR_EMAIL"));
+const rawOperatorEmail = readEnv("PUBLIC_OPERATOR_EMAIL");
+// Operator identity is optional and the site owner's choice — not a
+// blocker. A *provided* email is still validated: a typo is a bug, not a
+// privacy choice.
+const emailCheck = rawOperatorEmail ? validateOperatorEmail(rawOperatorEmail) : undefined;
 const robotsPolicy = readEnv("PUBLIC_ROBOTS_POLICY");
 const adsenseEnabled = readEnv("PUBLIC_ADSENSE_ENABLED") === "true";
 const adsenseClientId = readEnv("PUBLIC_ADSENSE_CLIENT_ID");
 
 const blockers = [];
 if (!urlCheck.ok) blockers.push(`PUBLIC_SITE_URL: ${urlCheck.error}`);
-if (!operatorName) blockers.push("PUBLIC_OPERATOR_NAME is not set.");
-if (!emailCheck.ok) blockers.push(`PUBLIC_OPERATOR_EMAIL: ${emailCheck.error}`);
+if (emailCheck && !emailCheck.ok) blockers.push(`PUBLIC_OPERATOR_EMAIL: ${emailCheck.error}`);
 
 const advisories = [];
+if (!operatorName && !rawOperatorEmail) {
+  advisories.push(
+    "No public operator name/email is configured — About/Contact-related copy will say so rather than publish a placeholder. Fine if that's intentional."
+  );
+}
 if (robotsPolicy === "noindex") {
   advisories.push('PUBLIC_ROBOTS_POLICY=noindex — this build will tell search engines not to index it. Remove this for the final public launch.');
 }

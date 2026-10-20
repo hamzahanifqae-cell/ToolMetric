@@ -1,12 +1,13 @@
 import { validateProductionUrl, validateOperatorEmail } from "@toolmetric/shared";
 
 /**
- * Centralized, typed public operator/launch configuration. Every value that
- * must be real before launch (not a code default) is listed in
- * `launchBlockers` when missing or invalid, so the gap is explicit rather
- * than a silently-published placeholder. Run `npm run launch-check` (in
- * apps/web) to see this report from the command line, with a non-zero
- * exit code when blockers remain — suitable for gating a release in CI.
+ * Centralized, typed public operator/launch configuration. `PUBLIC_SITE_URL`
+ * must be real before a release build will even complete — see
+ * `launchBlockers`. Publishing an operator name/email is optional and
+ * entirely the site owner's choice: unset is a valid, supported state (the
+ * About/Contact copy says so plainly rather than inventing a placeholder),
+ * not something this build enforces or nags about. A *provided* email is
+ * still validated, though — a typo is a bug, not a privacy choice.
  */
 
 const DEV_FALLBACK_SITE_URL = "http://localhost:4321";
@@ -17,7 +18,8 @@ function readEnv(key: keyof ImportMetaEnv): string | undefined {
 }
 
 const urlCheck = validateProductionUrl(readEnv("PUBLIC_SITE_URL"));
-const emailCheck = validateOperatorEmail(readEnv("PUBLIC_OPERATOR_EMAIL"));
+const rawOperatorEmail = readEnv("PUBLIC_OPERATOR_EMAIL");
+const emailCheck = rawOperatorEmail ? validateOperatorEmail(rawOperatorEmail) : undefined;
 
 export const siteConfig = {
   name: readEnv("PUBLIC_SITE_NAME") ?? "ToolMetric",
@@ -37,14 +39,15 @@ export const siteConfig = {
   operatorName: readEnv("PUBLIC_OPERATOR_NAME"),
 
   /**
-   * Set only when PUBLIC_OPERATOR_EMAIL passes syntax validation — an
-   * invalid address is never published as if it were real (e.g. as a
-   * mailto: link). See `operatorEmailError` for why it's missing/invalid.
-   * Validation is syntactic only: it does not confirm the mailbox exists
-   * or receives mail.
+   * Set only when PUBLIC_OPERATOR_EMAIL is both provided and passes syntax
+   * validation — an invalid address is never published as if it were real
+   * (e.g. as a mailto: link). Unset is a normal, supported state (no
+   * error); `operatorEmailError` is only set when a value was provided but
+   * rejected. Validation is syntactic only: it does not confirm the
+   * mailbox exists or receives mail.
    */
-  operatorEmail: emailCheck.ok ? emailCheck.value : undefined,
-  operatorEmailError: emailCheck.ok ? undefined : emailCheck.error,
+  operatorEmail: emailCheck?.ok ? emailCheck.value : undefined,
+  operatorEmailError: emailCheck && !emailCheck.ok ? emailCheck.error : undefined,
 
   /**
    * Explicit, intentional indexing policy — independent of the URL safety
@@ -74,21 +77,24 @@ export const apiBaseUrl = readEnv("PUBLIC_API_BASE_URL") ?? "";
 /** True only when the site is actually safe to let search engines index. */
 export const allowIndexing = !siteConfig.usingFallbackUrl && siteConfig.robotsPolicy === "index";
 
-/** Missing/invalid operator or domain configuration that blocks a real release. */
+/** Missing/invalid configuration that blocks a real release. Operator identity is intentionally not here — see the module doc comment above. */
 export const launchBlockers: string[] = [
   siteConfig.usingFallbackUrl
     ? `PUBLIC_SITE_URL is not production-ready: ${siteConfig.siteUrlError} Canonical URLs, the sitemap, and structured data all depend on this being a real HTTPS domain.`
     : undefined,
-  !siteConfig.operatorName ? "PUBLIC_OPERATOR_NAME is not set — no public operator/business name is configured." : undefined,
-  !emailCheck.ok ? `PUBLIC_OPERATOR_EMAIL is not valid: ${emailCheck.error}` : undefined,
+  siteConfig.operatorEmailError ? `PUBLIC_OPERATOR_EMAIL is not valid: ${siteConfig.operatorEmailError}` : undefined,
 ].filter((v): v is string => Boolean(v));
 
 /**
  * Advisory, non-blocking configuration notes — distinct from
- * `launchBlockers` because a missing AdSense ID must never prevent an
- * otherwise valid, ad-free release.
+ * `launchBlockers` because none of these should ever prevent an otherwise
+ * valid release (a missing AdSense ID, or a deliberately undisclosed
+ * operator identity, are both supported, intentional states).
  */
 export const launchAdvisories: string[] = [
+  !siteConfig.operatorName && !siteConfig.operatorEmail
+    ? "No public operator name/email is configured — About and Contact-related copy will say so rather than publish a placeholder. This is fine if that's intentional."
+    : undefined,
   siteConfig.adsenseEnabled && !siteConfig.adsenseClientId
     ? "PUBLIC_ADSENSE_ENABLED is true but PUBLIC_ADSENSE_CLIENT_ID is not set, so the ad slot component will still render nothing."
     : undefined,

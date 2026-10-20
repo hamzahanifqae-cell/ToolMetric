@@ -29,14 +29,18 @@ const isBuildCommand = process.argv.includes("build");
 const allowLocalBuild = process.env.TOOLMETRIC_ALLOW_LOCAL_BUILD === "true";
 
 const urlCheck = validateProductionUrl(process.env.PUBLIC_SITE_URL);
-const emailCheck = validateOperatorEmail(process.env.PUBLIC_OPERATOR_EMAIL);
-const hasOperatorName = Boolean(process.env.PUBLIC_OPERATOR_NAME?.trim());
+
+// Operator name/email are optional — publishing an operator identity is the
+// site owner's choice, not something this build enforces. If one *is*
+// provided, though, it's still validated: a typo'd/malformed value is a
+// real bug, not a privacy choice, so that still blocks.
+const rawOperatorEmail = process.env.PUBLIC_OPERATOR_EMAIL?.trim();
+const emailCheck = rawOperatorEmail ? validateOperatorEmail(rawOperatorEmail) : undefined;
 
 if (isBuildCommand && !allowLocalBuild) {
   const problems = [];
   if (!urlCheck.ok) problems.push(`PUBLIC_SITE_URL: ${urlCheck.error}`);
-  if (!hasOperatorName) problems.push("PUBLIC_OPERATOR_NAME is not set.");
-  if (!emailCheck.ok) problems.push(`PUBLIC_OPERATOR_EMAIL: ${emailCheck.error}`);
+  if (emailCheck && !emailCheck.ok) problems.push(`PUBLIC_OPERATOR_EMAIL: ${emailCheck.error}`);
 
   if (problems.length > 0) {
     console.error("\n[toolmetric] Release build blocked — required configuration is missing or invalid:\n");
