@@ -11,3 +11,5 @@ tmp/
 apps/api/tmp-uploads/
 .vercel/
 .netlify/
+*.zip
+deploy-cpanel-api/
