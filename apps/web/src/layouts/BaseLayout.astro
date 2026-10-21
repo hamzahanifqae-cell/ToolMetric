@@ -40,6 +40,15 @@ const pageTitle = title === siteConfig.name ? title : `${title} | ${siteConfig.n
     <meta name="twitter:card" content="summary" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    {siteConfig.adsenseEnabled && siteConfig.adsenseClientId && (
+      <script
+        is:inline
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${siteConfig.adsenseClientId}`}
+        crossorigin="anonymous"
+      ></script>
+    )}
   </head>
   <body class="flex min-h-screen flex-col">
     <a
