@@ -19,7 +19,7 @@ const labels = {image:'Image tools', calculators:'Calculators', converters:'Conv
     <details class="mobile-nav"><summary aria-label="Toggle navigation">Menu <span aria-hidden="true">☰</span></summary><nav aria-label="Mobile tools">{navItems.map(cat=><details><summary>{cat.label}</summary><a href={cat.path}>All {labels[cat.key].toLowerCase()} →</a>{TOOLS.filter(t=>t.category===cat.key).map(t=><a href={t.path}>{t.title}</a>)}</details>)}<a href="/tools">Browse all tools →</a></nav></details>
     </div>
   </div>
-  <div class="quick-nav"><nav aria-label="Quick tools"><span>QUICK ACCESS</span><a href="/tools/image/compressor">Compress image</a><a href="/tools/calculators/percentage">Percentage</a><a href="/tools/converters/length">Length converter</a><a href="/tools/electrical/ohms-law">Ohm’s law</a><a href="/tools/calculators/age">Age calculator</a></nav></div>
+    <div class="quick-nav"><nav aria-label="Quick tools"><span>QUICK ACCESS</span><a href="/tools/image/png-to-jpg">PNG to JPG</a><a href="/tools/calculators/percentage">Percentage calculator</a><a href="/tools/converters/temperature">Celsius to Fahrenheit</a><a href="/tools/converters/mass">KG to lbs</a><a href="/tools/calculators/age">Age calculator</a></nav></div>
 </header>
 <script is:inline>
 const dropdowns = [...document.querySelectorAll('.nav-dropdown')];

@@ -160,6 +160,25 @@ This section documents what AdSense itself requires, as distinct from this proje
 
 **Nothing about this tech stack, the number of tools, the amount of content, or passing `npm run launch-check` guarantees AdSense approval or ongoing compliance.** Those are Google's decisions, made against policies this project does not control.
 
+## Google Search Console
+
+Search Console is where you prove you control https://toolmetric.online, see which queries the site shows up for, and ask Google to crawl the sitemap. Verification does not by itself raise rankings. The HTML-tag token is public: it is printed on the homepage, and it is not an API key.
+
+1. Open [Google Search Console](https://search.google.com/search-console) and sign in with the Google account that should own the site.
+2. Add a property. Use **URL prefix** `https://toolmetric.online/` if you want the HTML tag in this repo. Use **Domain** `toolmetric.online` if you can add a DNS TXT record (that covers `www` as well, and does not use the env token).
+3. For the URL-prefix property, choose the **HTML tag** method. Copy the `content` value from the tag Google shows.
+4. On the server, set it in `apps/web/.env` (this file is gitignored):
+
+   ```bash
+   PUBLIC_GOOGLE_SITE_VERIFICATION=the-token-from-google
+   ```
+
+   You can paste the whole `<meta ...>` tag instead of the bare token. Rebuild with `PUBLIC_SITE_URL=https://toolmetric.online` and copy `apps/web/dist` to `public_html`, the same way as any other web deploy.
+5. Confirm the live homepage source contains `<meta name="google-site-verification" content="...">`, then click **Verify** in Search Console.
+6. In Search Console, open **Sitemaps** and submit `https://toolmetric.online/sitemap-index.xml`.
+
+`www.toolmetric.online` currently serves the same pages as the apex host. In cPanel, add a permanent redirect from `www` to `https://toolmetric.online` so Google does not treat them as two sites. The pages already declare `https://toolmetric.online/...` as the canonical URL.
+
 ## Launch checklist
 
 Run the automated check first:

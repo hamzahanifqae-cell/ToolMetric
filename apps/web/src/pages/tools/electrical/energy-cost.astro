@@ -8,7 +8,6 @@ const tool = getToolByPath("/tools/electrical/energy-cost")!;
 
 <ToolLayout
   tool={tool}
-  description="Estimate kWh energy consumption and cost from power, usage time, and your own electricity rate."
   purpose="Estimate the energy consumed (in kWh) and its approximate cost, based on a device's power, how long it runs, and your electricity rate."
 >
   <EnergyCostCalculator client:load />

@@ -8,6 +8,7 @@ interface ImportMetaEnv {
   readonly PUBLIC_ADSENSE_ENABLED: string | undefined;
   readonly PUBLIC_ADSENSE_CLIENT_ID: string | undefined;
   readonly PUBLIC_ROBOTS_POLICY: string | undefined;
+  readonly PUBLIC_GOOGLE_SITE_VERIFICATION: string | undefined;
   readonly PUBLIC_API_BASE_URL: string | undefined;
 }
 

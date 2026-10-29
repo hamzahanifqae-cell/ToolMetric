@@ -1,32 +1,36 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { getToolFaqs } from "../content/faqs.js";
 import { CATEGORIES, getRelatedTools, type ToolMeta } from "../content/tools.js";
 import { siteConfig } from "../config/site.js";
+import { breadcrumbJsonLd, faqPageJsonLd, webApplicationJsonLd } from "../lib/structuredData.js";
 
 interface Props {
   tool: ToolMeta;
-  description: string;
   purpose: string;
 }
 
-const { tool, description, purpose } = Astro.props;
+const { tool, purpose } = Astro.props;
 const category = CATEGORIES[tool.category];
 const related = getRelatedTools(tool);
+const faqs = getToolFaqs(tool.slug);
 
-const breadcrumbJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "All Tools", item: new URL("/tools", siteConfig.url).toString() },
-    { "@type": "ListItem", position: 2, name: category.label, item: new URL(category.path, siteConfig.url).toString() },
-    { "@type": "ListItem", position: 3, name: tool.title, item: new URL(tool.path, siteConfig.url).toString() },
-  ],
-};
+const jsonLd = [
+  breadcrumbJsonLd(
+    [
+      { name: "All Tools", path: "/tools" },
+      { name: category.label, path: category.path },
+      { name: tool.title, path: tool.path },
+    ],
+    siteConfig.url,
+  ),
+  webApplicationJsonLd(tool, siteConfig.url),
+  ...(faqs.length > 0 ? [faqPageJsonLd(faqs)] : []),
+];
 ---
 
-<BaseLayout title={tool.title} description={description}>
-  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
+<BaseLayout title={tool.title} description={tool.metaDescription} keywords={tool.keywords} jsonLd={jsonLd}>
   <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
     <Breadcrumbs
       items={[
@@ -48,6 +52,20 @@ const breadcrumbJsonLd = {
     <section class="prose-tool mt-10 max-w-3xl">
       <slot name="details" />
     </section>
+
+    {
+      faqs.length > 0 && (
+        <section class="prose-tool mt-10 max-w-3xl" aria-labelledby="tool-faq-heading">
+          <h2 id="tool-faq-heading">Common questions</h2>
+          {faqs.map((faq) => (
+            <div>
+              <h3>{faq.question}</h3>
+              <p>{faq.answer}</p>
+            </div>
+          ))}
+        </section>
+      )
+    }
 
     {
       related.length > 0 && (
@@ -81,6 +99,12 @@ const breadcrumbJsonLd = {
   .prose-tool :global(h2:first-child) {
     margin-top: 0;
   }
+  .prose-tool :global(h3) {
+    margin-top: 1.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-navy-900);
+  }
   .prose-tool :global(p) {
     margin-top: 0.5rem;
     color: var(--color-navy-700);
@@ -94,6 +118,11 @@ const breadcrumbJsonLd = {
   }
   .prose-tool :global(li) {
     margin-top: 0.25rem;
+  }
+  .prose-tool :global(a) {
+    color: var(--color-teal-800);
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
   .prose-tool :global(code) {
     border-radius: 0.25rem;

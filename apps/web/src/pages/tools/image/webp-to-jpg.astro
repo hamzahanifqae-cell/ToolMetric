@@ -8,7 +8,6 @@ const tool = getToolByPath("/tools/image/webp-to-jpg")!;
 
 <ToolLayout
   tool={tool}
-  description="Convert WebP images to JPG in your browser, with control over the background color used for transparency. No upload required."
   purpose="Convert a WebP file to JPG. Choose a background color to fill transparent areas, since JPG does not support transparency."
 >
   <ConvertImageTool client:load acceptAttr="image/webp" acceptedLabel="WebP" outputFormat="jpeg" />

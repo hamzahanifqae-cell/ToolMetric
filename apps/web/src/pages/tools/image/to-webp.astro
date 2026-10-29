@@ -8,7 +8,6 @@ const tool = getToolByPath("/tools/image/to-webp")!;
 
 <ToolLayout
   tool={tool}
-  description="Convert JPG or PNG images to WebP in your browser for smaller file sizes. No upload required."
   purpose="Convert a JPG or PNG file to the modern WebP format, which typically produces smaller files at comparable visual quality."
 >
   <ConvertImageTool client:load acceptAttr="image/jpeg,image/png" acceptedLabel="JPG or PNG" outputFormat="webp" />

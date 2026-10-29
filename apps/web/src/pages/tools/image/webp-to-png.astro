@@ -8,7 +8,6 @@ const tool = getToolByPath("/tools/image/webp-to-png")!;
 
 <ToolLayout
   tool={tool}
-  description="Convert WebP images to PNG in your browser, preserving transparency. No upload required."
   purpose="Convert a WebP file to PNG, preserving any transparency, for compatibility with tools that don't support WebP."
 >
   <ConvertImageTool client:load acceptAttr="image/webp" acceptedLabel="WebP" outputFormat="png" />

@@ -3,6 +3,7 @@ import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { siteConfig, allowIndexing } from "../config/site.js";
+import { serializeJsonLd } from "../lib/structuredData.js";
 
 interface Props {
   title: string;
@@ -16,11 +17,18 @@ interface Props {
    * search/filter states) can still force `false` explicitly.
    */
   index?: boolean;
+  /** A short list of the phrases this page is actually about. Capped at render time. */
+  keywords?: string[];
+  jsonLd?: Record<string, unknown>[];
 }
 
-const { title, description, index = allowIndexing } = Astro.props;
+const { title, description, index = allowIndexing, keywords = [], jsonLd = [] } = Astro.props;
 const canonicalUrl = new URL(Astro.url.pathname, siteConfig.url).toString();
 const pageTitle = title === siteConfig.name ? title : `${title} | ${siteConfig.name}`;
+const keywordContent = [...new Set(keywords.map((keyword) => keyword.trim()).filter(Boolean))].slice(0, 8).join(", ");
+const robotsContent = index
+  ? "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+  : "noindex, follow";
 ---
 
 <!doctype html>
@@ -30,16 +38,25 @@ const pageTitle = title === siteConfig.name ? title : `${title} | ${siteConfig.n
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    {keywordContent && <meta name="keywords" content={keywordContent} />}
     <link rel="canonical" href={canonicalUrl} />
-    {!index && <meta name="robots" content="noindex, follow" />}
+    <meta name="robots" content={robotsContent} />
+    {siteConfig.googleSiteVerification && (
+      <meta name="google-site-verification" content={siteConfig.googleSiteVerification} />
+    )}
 
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {jsonLd.map((data) => <script type="application/ld+json" set:html={serializeJsonLd(data)} />)}
 
     {siteConfig.adsenseEnabled && siteConfig.adsenseClientId && (
       <script

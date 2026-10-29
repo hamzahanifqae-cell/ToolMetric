@@ -2,13 +2,23 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import { ToolSearch } from "../../components/ToolSearch.js";
+import { TOOLS } from "../../content/tools.js";
+import { siteConfig } from "../../config/site.js";
+import { itemListJsonLd } from "../../lib/structuredData.js";
+
+const description = "Browse every free tool: PNG to JPG, percentage and age calculators, cm to inches, kg to lbs, Celsius to Fahrenheit, and Ohm's law.";
 ---
 
-<BaseLayout title="All Tools" description="Browse and search every tool: image tools, everyday calculators, unit converters, and electrical calculators.">
+<BaseLayout
+  title="All Free Online Tools"
+  description={description}
+  keywords={["free online tools", "percentage calculator", "png to jpg", "unit converter", "ohms law calculator"]}
+  jsonLd={[itemListJsonLd("All free online tools", TOOLS, siteConfig.url)]}
+>
   <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
     <Breadcrumbs items={[{ label: "All Tools" }]} />
-    <h1 class="text-2xl font-bold text-navy-900 sm:text-3xl">All Tools</h1>
-    <p class="mt-2 max-w-2xl text-navy-600">Search or filter by category to find the tool you need.</p>
+    <h1 class="text-2xl font-bold text-navy-900 sm:text-3xl">All free online tools</h1>
+    <p class="mt-2 max-w-2xl text-navy-600">Search or filter by category to find a calculator, converter, or image tool.</p>
     <div class="mt-6">
       <ToolSearch client:load />
     </div>

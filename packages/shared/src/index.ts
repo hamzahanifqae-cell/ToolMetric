@@ -21,4 +21,5 @@ export * from "./image/resizeMath.js";
 
 export * from "./config/productionUrl.js";
 export * from "./config/operatorEmail.js";
+export * from "./config/googleSiteVerification.js";
 export * from "./config/reservedHostnames.js";

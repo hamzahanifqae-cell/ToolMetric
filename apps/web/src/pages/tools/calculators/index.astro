@@ -3,15 +3,17 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../../components/Breadcrumbs.astro";
 import CategoryToolGrid from "../../../components/CategoryToolGrid.astro";
 import { CATEGORIES, getToolsByCategory } from "../../../content/tools.js";
+import { siteConfig } from "../../../config/site.js";
+import { itemListJsonLd } from "../../../lib/structuredData.js";
 
 const category = CATEGORIES.calculators;
 const tools = getToolsByCategory("calculators");
 ---
 
-<BaseLayout title={category.label} description={category.description}>
+<BaseLayout title={category.heading} description={category.description} keywords={category.keywords} jsonLd={[itemListJsonLd(category.heading, tools, siteConfig.url)]}>
   <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
     <Breadcrumbs items={[{ label: "All Tools", path: "/tools" }, { label: category.label }]} />
-    <h1 class="text-2xl font-bold text-navy-900 sm:text-3xl">{category.label}</h1>
+    <h1 class="text-2xl font-bold text-navy-900 sm:text-3xl">{category.heading}</h1>
     <p class="mt-2 max-w-2xl text-navy-600">{category.description}</p>
     <CategoryToolGrid tools={tools} />
   </div>

@@ -1,4 +1,4 @@
-import { validateProductionUrl, validateOperatorEmail } from "@toolmetric/shared";
+import { validateProductionUrl, validateOperatorEmail, parseGoogleSiteVerification } from "@toolmetric/shared";
 
 /**
  * Centralized, typed public operator/launch configuration. `PUBLIC_SITE_URL`
@@ -20,6 +20,7 @@ function readEnv(key: keyof ImportMetaEnv): string | undefined {
 const urlCheck = validateProductionUrl(readEnv("PUBLIC_SITE_URL"));
 const rawOperatorEmail = readEnv("PUBLIC_OPERATOR_EMAIL");
 const emailCheck = rawOperatorEmail ? validateOperatorEmail(rawOperatorEmail) : undefined;
+const verificationCheck = parseGoogleSiteVerification(readEnv("PUBLIC_GOOGLE_SITE_VERIFICATION"));
 
 export const siteConfig = {
   name: readEnv("PUBLIC_SITE_NAME") ?? "ToolMetric",
@@ -61,6 +62,12 @@ export const siteConfig = {
 
   adsenseEnabled: readEnv("PUBLIC_ADSENSE_ENABLED") === "true",
   adsenseClientId: readEnv("PUBLIC_ADSENSE_CLIENT_ID"),
+
+  /**
+   * Public Search Console HTML-tag token. Present in the homepage `<head>`
+   * only when the value parses. This is not a secret and not an API key.
+   */
+  googleSiteVerification: verificationCheck.ok ? verificationCheck.value : undefined,
 } as const;
 
 /**
@@ -83,6 +90,7 @@ export const launchBlockers: string[] = [
     ? `PUBLIC_SITE_URL is not production-ready: ${siteConfig.siteUrlError} Canonical URLs, the sitemap, and structured data all depend on this being a real HTTPS domain.`
     : undefined,
   siteConfig.operatorEmailError ? `PUBLIC_OPERATOR_EMAIL is not valid: ${siteConfig.operatorEmailError}` : undefined,
+  verificationCheck.ok ? undefined : `PUBLIC_GOOGLE_SITE_VERIFICATION ${verificationCheck.error}`,
 ].filter((v): v is string => Boolean(v));
 
 /**

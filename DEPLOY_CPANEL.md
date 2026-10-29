@@ -139,6 +139,10 @@ cPanel → **SSL/TLS Status** → run **AutoSSL** for `toolmetric.online` (and
   offers a download.
 - View source on any page — confirm there's **no**
   `<meta name="robots" content="noindex">` tag.
+- After you set `PUBLIC_GOOGLE_SITE_VERIFICATION` and rebuild, view source
+  on the homepage and confirm `<meta name="google-site-verification">` is
+  present, then verify the property in [Search Console](https://search.google.com/search-console)
+  and submit `https://toolmetric.online/sitemap-index.xml`. See the README.
 
 ## Troubleshooting
 

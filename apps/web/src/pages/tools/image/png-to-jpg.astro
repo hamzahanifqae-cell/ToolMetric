@@ -8,7 +8,6 @@ const tool = getToolByPath("/tools/image/png-to-jpg")!;
 
 <ToolLayout
   tool={tool}
-  description="Convert PNG images to JPG in your browser, with control over the background color used for transparent areas. No upload required."
   purpose="Convert a PNG file to JPG. Choose a background color to fill transparent areas, since JPG does not support transparency."
 >
   <ConvertImageTool client:load acceptAttr="image/png" acceptedLabel="PNG" outputFormat="jpeg" />
