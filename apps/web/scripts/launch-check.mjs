@@ -10,7 +10,7 @@
 // shell exports, etc). To check a local `.env` file instead, run:
 //
 //   node --env-file-if-exists=.env scripts/launch-check.mjs
-import { validateProductionUrl, validateOperatorEmail, parseGoogleSiteVerification } from "@toolmetric/shared";
+import { validateProductionUrl, validateOperatorEmail, parseGoogleSiteVerification, parseGaMeasurementId } from "@toolmetric/shared";
 
 function readEnv(key) {
   const value = process.env[key];
@@ -28,11 +28,13 @@ const robotsPolicy = readEnv("PUBLIC_ROBOTS_POLICY");
 const adsenseEnabled = readEnv("PUBLIC_ADSENSE_ENABLED") === "true";
 const adsenseClientId = readEnv("PUBLIC_ADSENSE_CLIENT_ID");
 const verificationCheck = parseGoogleSiteVerification(readEnv("PUBLIC_GOOGLE_SITE_VERIFICATION"));
+const gaCheck = parseGaMeasurementId(readEnv("PUBLIC_GA_MEASUREMENT_ID"));
 
 const blockers = [];
 if (!urlCheck.ok) blockers.push(`PUBLIC_SITE_URL: ${urlCheck.error}`);
 if (emailCheck && !emailCheck.ok) blockers.push(`PUBLIC_OPERATOR_EMAIL: ${emailCheck.error}`);
 if (!verificationCheck.ok) blockers.push(`PUBLIC_GOOGLE_SITE_VERIFICATION: ${verificationCheck.error}`);
+if (!gaCheck.ok) blockers.push(`PUBLIC_GA_MEASUREMENT_ID: ${gaCheck.error}`);
 
 const advisories = [];
 if (!operatorName && !rawOperatorEmail) {
@@ -47,6 +49,11 @@ if (adsenseEnabled && !adsenseClientId) {
   advisories.push("PUBLIC_ADSENSE_ENABLED=true but PUBLIC_ADSENSE_CLIENT_ID is not set — the ad slot will still render nothing.");
 } else if (!adsenseEnabled) {
   advisories.push("Advertising is disabled. That's expected for an ad-free release; see README before enabling it.");
+}
+if (gaCheck.ok && !gaCheck.value) {
+  advisories.push(
+    "PUBLIC_GA_MEASUREMENT_ID is not set, so visits are not sent to Google Analytics. Create a GA4 property and set the measurement ID before expecting traffic reports."
+  );
 }
 if (verificationCheck.ok && !verificationCheck.value) {
   advisories.push(

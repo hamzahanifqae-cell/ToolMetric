@@ -179,6 +179,21 @@ Search Console is where you prove you control https://toolmetric.online, see whi
 
 `www.toolmetric.online` currently serves the same pages as the apex host. In cPanel, add a permanent redirect from `www` to `https://toolmetric.online` so Google does not treat them as two sites. The pages already declare `https://toolmetric.online/...` as the canonical URL.
 
+## Google Analytics
+
+Search Console shows queries from Google. Google Analytics shows visits to the site. The tag is off until `PUBLIC_GA_MEASUREMENT_ID` is set at build time.
+
+1. Open [Google Analytics](https://analytics.google.com) with the same Google account you use for Search Console.
+2. Admin → **Create** → **Property**. Name it ToolMetric, then create a **Web** data stream for `https://toolmetric.online`.
+3. Copy the **Measurement ID** (`G-` followed by letters and numbers).
+4. On the server, add it to `apps/web/.env` and rebuild:
+
+   ```bash
+   PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+   ```
+
+5. After deploy, open the site once, then in Analytics open **Reports → Realtime**. Your visit should appear within a minute. Standard reports take about a day to fill in.
+
 ## Launch checklist
 
 Run the automated check first:

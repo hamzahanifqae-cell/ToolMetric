@@ -58,6 +58,22 @@ const robotsContent = index
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     {jsonLd.map((data) => <script type="application/ld+json" set:html={serializeJsonLd(data)} />)}
 
+    {siteConfig.gaMeasurementId && (
+      <>
+        <script
+          is:inline
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.gaMeasurementId}`}
+        ></script>
+        <script is:inline define:vars={{ measurementId: siteConfig.gaMeasurementId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag("js", new Date());
+          gtag("config", measurementId);
+        </script>
+      </>
+    )}
+
     {siteConfig.adsenseEnabled && siteConfig.adsenseClientId && (
       <script
         is:inline

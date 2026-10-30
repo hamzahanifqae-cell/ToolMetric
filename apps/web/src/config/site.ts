@@ -1,4 +1,4 @@
-import { validateProductionUrl, validateOperatorEmail, parseGoogleSiteVerification } from "@toolmetric/shared";
+import { validateProductionUrl, validateOperatorEmail, parseGoogleSiteVerification, parseGaMeasurementId } from "@toolmetric/shared";
 
 /**
  * Centralized, typed public operator/launch configuration. `PUBLIC_SITE_URL`
@@ -21,6 +21,7 @@ const urlCheck = validateProductionUrl(readEnv("PUBLIC_SITE_URL"));
 const rawOperatorEmail = readEnv("PUBLIC_OPERATOR_EMAIL");
 const emailCheck = rawOperatorEmail ? validateOperatorEmail(rawOperatorEmail) : undefined;
 const verificationCheck = parseGoogleSiteVerification(readEnv("PUBLIC_GOOGLE_SITE_VERIFICATION"));
+const gaCheck = parseGaMeasurementId(readEnv("PUBLIC_GA_MEASUREMENT_ID"));
 
 export const siteConfig = {
   name: readEnv("PUBLIC_SITE_NAME") ?? "ToolMetric",
@@ -68,6 +69,12 @@ export const siteConfig = {
    * only when the value parses. This is not a secret and not an API key.
    */
   googleSiteVerification: verificationCheck.ok ? verificationCheck.value : undefined,
+
+  /**
+   * GA4 measurement ID (G-XXXXXXXXXX). The Analytics tag is omitted when
+   * this is unset. The ID is public — it is loaded by every visitor's browser.
+   */
+  gaMeasurementId: gaCheck.ok ? gaCheck.value : undefined,
 } as const;
 
 /**
@@ -91,6 +98,7 @@ export const launchBlockers: string[] = [
     : undefined,
   siteConfig.operatorEmailError ? `PUBLIC_OPERATOR_EMAIL is not valid: ${siteConfig.operatorEmailError}` : undefined,
   verificationCheck.ok ? undefined : `PUBLIC_GOOGLE_SITE_VERIFICATION ${verificationCheck.error}`,
+  gaCheck.ok ? undefined : `PUBLIC_GA_MEASUREMENT_ID ${gaCheck.error}`,
 ].filter((v): v is string => Boolean(v));
 
 /**

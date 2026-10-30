@@ -3,7 +3,7 @@ import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
-import { validateProductionUrl, validateOperatorEmail, parseGoogleSiteVerification } from "@toolmetric/shared";
+import { validateProductionUrl, validateOperatorEmail, parseGoogleSiteVerification, parseGaMeasurementId } from "@toolmetric/shared";
 
 // Astro does not populate process.env from .env before evaluating this file
 // (it only does that later, for import.meta.env, via Vite) — so without
@@ -37,12 +37,14 @@ const urlCheck = validateProductionUrl(process.env.PUBLIC_SITE_URL);
 const rawOperatorEmail = process.env.PUBLIC_OPERATOR_EMAIL?.trim();
 const emailCheck = rawOperatorEmail ? validateOperatorEmail(rawOperatorEmail) : undefined;
 const verificationCheck = parseGoogleSiteVerification(process.env.PUBLIC_GOOGLE_SITE_VERIFICATION);
+const gaCheck = parseGaMeasurementId(process.env.PUBLIC_GA_MEASUREMENT_ID);
 
 if (isBuildCommand && !allowLocalBuild) {
   const problems = [];
   if (!urlCheck.ok) problems.push(`PUBLIC_SITE_URL: ${urlCheck.error}`);
   if (emailCheck && !emailCheck.ok) problems.push(`PUBLIC_OPERATOR_EMAIL: ${emailCheck.error}`);
   if (!verificationCheck.ok) problems.push(`PUBLIC_GOOGLE_SITE_VERIFICATION: ${verificationCheck.error}`);
+  if (!gaCheck.ok) problems.push(`PUBLIC_GA_MEASUREMENT_ID: ${gaCheck.error}`);
 
   if (problems.length > 0) {
     console.error("\n[toolmetric] Release build blocked — required configuration is missing or invalid:\n");
