@@ -8,11 +8,17 @@ const tool = getToolByPath("/tools/electrical/ohms-law")!;
 
 <ToolLayout
   tool={tool}
-  purpose="Solve for voltage, current, or resistance given the other two values, using Ohm's law."
+  purpose="Current calculator for amps. Enter voltage and resistance, leave current blank, and Ohm's law fills it in. You can also solve for volts or ohms."
 >
   <OhmsLawCalculator client:load />
 
   <Fragment slot="details">
+    <h2>How to calculate current</h2>
+    <p>
+      Electrical current in amps is voltage divided by resistance: <code>I = V ÷ R</code>. A 12 volt supply across a
+      6 ohm resistor draws 12 ÷ 6 = 2 amps. Leave the current box empty and enter the other two values.
+    </p>
+
     <h2>Formula</h2>
     <p><code>V = I × R</code> (voltage = current × resistance), rearranged to solve for whichever value is missing.</p>
 

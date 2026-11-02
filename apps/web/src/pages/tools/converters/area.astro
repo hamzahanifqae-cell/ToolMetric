@@ -8,11 +8,44 @@ const tool = getToolByPath("/tools/converters/area")!;
 
 <ToolLayout
   tool={tool}
-  purpose="Convert an area value between metric and imperial/US customary units."
+  purpose="Area converter for acres, square feet, square meters, hectares, and square miles."
 >
   <AreaConverter client:load />
 
   <Fragment slot="details">
+    <h2>Common area conversions</h2>
+    <table>
+      <caption>Area factors used by this converter</caption>
+      <thead>
+        <tr>
+          <th scope="col">From</th>
+          <th scope="col">Equals</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1 acre</td>
+          <td>43,560 square feet</td>
+        </tr>
+        <tr>
+          <td>1 acre</td>
+          <td>4,046.8564224 square meters</td>
+        </tr>
+        <tr>
+          <td>1 square meter</td>
+          <td>10.7639 square feet (rounded)</td>
+        </tr>
+        <tr>
+          <td>1 hectare</td>
+          <td>10,000 square meters</td>
+        </tr>
+        <tr>
+          <td>1 hectare</td>
+          <td>2.47105 acres (rounded)</td>
+        </tr>
+      </tbody>
+    </table>
+
     <h2>How it works</h2>
     <p>
       Every unit is converted through square meters as a common base, then into your target unit, so every

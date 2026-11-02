@@ -106,9 +106,13 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
   ],
   length: [
     {
-      question: "How many centimeters are in an inch?",
+      question: "How do I convert length between centimeters and inches?",
       answer:
-        "One inch is exactly 2.54 centimeters. This converter uses that international definition, with meters as the common base for every other length unit.",
+        "One inch is exactly 2.54 centimeters, so divide centimeters by 2.54 to get inches. This length converter uses that factor, with meters as the common base for feet, yards, miles, and millimeters too.",
+    },
+    {
+      question: "How many feet are in a meter?",
+      answer: "One meter is 3.28084 feet. One foot is exactly 0.3048 meters.",
     },
   ],
   mass: [
@@ -130,11 +134,21 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
   ],
   area: [
     {
+      question: "How do I convert acres to square feet?",
+      answer: "One acre is exactly 43,560 square feet, and 4,046.8564224 square meters. Enter the value in this area converter and pick the two units.",
+    },
+    {
       question: "Which area units can I convert?",
-      answer: "Square meters, square feet, acres, hectares, and square miles, among the units listed on the converter. Every pair uses the same published conversion factors.",
+      answer:
+        "Square meters, square feet, acres, hectares, and square miles, among the units listed on the converter. Every pair uses the same published conversion factors.",
     },
   ],
   "ohms-law": [
+    {
+      question: "How do I calculate electrical current?",
+      answer:
+        "Current in amps is voltage divided by resistance: I = V ÷ R. Leave the current field blank, enter the other two, and this current calculator fills it in. A 12 V supply across 6 Ω draws 2 A.",
+    },
     {
       question: "What is the Ohm's law formula?",
       answer: "Voltage equals current times resistance: V = I × R. Enter any two values and the calculator solves for the missing one.",

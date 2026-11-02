@@ -36,8 +36,8 @@ export const CATEGORIES: Record<ToolCategory, CategoryMeta> = {
     heading: "Free Unit Converters",
     path: "/tools/converters",
     description:
-      "Free unit converters for centimeters to inches, kilograms to pounds, Celsius to Fahrenheit, and acres to square feet.",
-    keywords: ["cm to inches", "kg to lbs", "celsius to fahrenheit", "area converter", "unit converter"],
+      "Free length converter and area converter, plus kilograms to pounds and Celsius to Fahrenheit. Results stay in your browser.",
+    keywords: ["length converter", "area converter", "cm to inches", "kg to lbs", "celsius to fahrenheit", "unit converter"],
   },
   electrical: {
     key: "electrical",
@@ -45,8 +45,8 @@ export const CATEGORIES: Record<ToolCategory, CategoryMeta> = {
     heading: "Electrical Calculators",
     path: "/tools/electrical",
     description:
-      "Free electrical calculators for Ohm's law, watts from volts and amps, series and parallel resistance, and electricity cost in kWh.",
-    keywords: ["ohms law calculator", "watts calculator", "series parallel resistance", "electricity cost calculator", "kwh calculator"],
+      "Free current calculator using Ohm's law, plus watts, series and parallel resistance, and electricity cost in kWh.",
+    keywords: ["current calculator", "ohms law calculator", "watts calculator", "series parallel resistance", "electricity cost calculator"],
   },
 };
 
@@ -174,12 +174,12 @@ export const TOOLS: ToolMeta[] = [
   {
     slug: "length",
     category: "converters",
-    title: "CM to Inches Converter",
+    title: "Length Converter",
     metaDescription:
-      "Free cm to inches converter, plus feet, meters, miles, yards, and millimeters. Convert length instantly in your browser.",
-    shortDescription: "Convert centimeters to inches, and between meters, feet, yards, miles, and millimeters.",
+      "Free length converter for centimeters, inches, feet, meters, miles, yards, and millimeters. Convert length instantly in your browser.",
+    shortDescription: "Length converter for centimeters and inches, plus meters, feet, yards, miles, and millimeters.",
     path: "/tools/converters/length",
-    keywords: ["cm to inches", "inches to cm", "feet to meters", "length converter", "mm to inches", "miles to km"],
+    keywords: ["length converter", "cm to inches", "inches to cm", "feet to meters", "mm to inches", "miles to km"],
   },
   {
     slug: "mass",
@@ -207,19 +207,19 @@ export const TOOLS: ToolMeta[] = [
     title: "Area Converter",
     metaDescription:
       "Free area converter for acres, square feet, square meters, and hectares. Convert land and floor area instantly in your browser.",
-    shortDescription: "Convert acres, square feet, square meters, hectares, and other area units.",
+    shortDescription: "Area converter for acres, square feet, square meters, hectares, and square miles.",
     path: "/tools/converters/area",
-    keywords: ["area converter", "acres to square feet", "square meters to square feet", "hectares to acres", "sq ft calculator"],
+    keywords: ["area converter", "converter area", "acres to square feet", "square meters to square feet", "hectares to acres"],
   },
   {
     slug: "ohms-law",
     category: "electrical",
-    title: "Ohm's Law Calculator",
+    title: "Current Calculator",
     metaDescription:
-      "Free Ohm's law calculator. Solve for voltage, current, or resistance with V = I × R. For DC and resistive circuits, in your browser.",
-    shortDescription: "Solve for voltage, current, or resistance in DC and resistive circuits.",
+      "Free current calculator. Find electrical current in amps from voltage and resistance with Ohm's law, I = V ÷ R. Also solves for volts and ohms.",
+    shortDescription: "Calculate current in amps from voltage and resistance, or solve for whichever value is missing.",
     path: "/tools/electrical/ohms-law",
-    keywords: ["ohms law calculator", "ohm's law", "voltage calculator", "current calculator", "resistance calculator", "v=ir"],
+    keywords: ["current calculator", "amp calculator", "calculate current", "ohms law calculator", "voltage calculator", "I = V/R"],
   },
   {
     slug: "power",

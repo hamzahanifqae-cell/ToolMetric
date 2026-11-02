@@ -8,11 +8,44 @@ const tool = getToolByPath("/tools/converters/length")!;
 
 <ToolLayout
   tool={tool}
-  purpose="Convert centimeters to inches, and between meters, feet, yards, miles, and millimeters."
+  purpose="Length converter for centimeters, inches, feet, meters, yards, miles, and millimeters."
 >
   <LengthConverter client:load />
 
   <Fragment slot="details">
+    <h2>Common length conversions</h2>
+    <table>
+      <caption>Length factors used by this converter</caption>
+      <thead>
+        <tr>
+          <th scope="col">From</th>
+          <th scope="col">Equals</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1 inch</td>
+          <td>2.54 centimeters</td>
+        </tr>
+        <tr>
+          <td>1 centimeter</td>
+          <td>0.393701 inches (rounded)</td>
+        </tr>
+        <tr>
+          <td>1 foot</td>
+          <td>0.3048 meters</td>
+        </tr>
+        <tr>
+          <td>1 meter</td>
+          <td>3.28084 feet (rounded)</td>
+        </tr>
+        <tr>
+          <td>1 mile</td>
+          <td>1.609344 kilometers</td>
+        </tr>
+      </tbody>
+    </table>
+
     <h2>How it works</h2>
     <p>
       Every unit is converted through meters as a common base (e.g. 1 inch = 0.0254 meters, per the international
