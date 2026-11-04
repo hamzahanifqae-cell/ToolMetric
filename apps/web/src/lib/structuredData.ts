@@ -2,7 +2,12 @@ import type { ToolFaq } from "../content/faqs.js";
 import type { ToolMeta } from "../content/tools.js";
 
 export function absoluteUrl(path: string, siteUrl: string): string {
-  return new URL(path, siteUrl).toString();
+  const url = new URL(path, siteUrl);
+  // Match the directory URLs used by canonicals and the sitemap.
+  if (!url.pathname.endsWith("/") && !path.includes(".")) {
+    url.pathname = `${url.pathname}/`;
+  }
+  return url.toString();
 }
 
 export function serializeJsonLd(data: unknown): string {

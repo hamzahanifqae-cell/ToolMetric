@@ -1,3 +1,4 @@
+import { readFile, unlink } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
@@ -58,6 +59,12 @@ if (isBuildCommand && !allowLocalBuild) {
     // client ID must never block an otherwise valid, ad-free release.
     process.exit(1);
   }
+
+  if (process.env.PUBLIC_ADSENSE_ENABLED !== "true" || !process.env.PUBLIC_ADSENSE_CLIENT_ID?.trim()) {
+    console.warn(
+      "\n[toolmetric] AdSense is not enabled for this build. Pages will not load the ads script, and a disabled ads.txt will be omitted so deploy does not replace a real ads.txt with \"Not found\".\n"
+    );
+  }
 }
 
 // Only reached in dev, in a passing release build, or with the explicit
@@ -75,21 +82,29 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      filter: (page) => !page.endsWith("/404") && !page.endsWith("/404/"),
-      serialize(item) {
-        const path = new URL(item.url).pathname.replace(/\/$/, "") || "/";
-        if (path === "/") return { ...item, changefreq: "weekly", priority: 1 };
-        if (path === "/about" || path === "/privacy" || path === "/terms") {
-          return { ...item, changefreq: "yearly", priority: 0.3 };
-        }
-        const segments = path.split("/").filter(Boolean);
-        if (segments[0] === "tools" && segments.length >= 3) {
-          return { ...item, changefreq: "monthly", priority: 0.8 };
-        }
-        if (segments[0] === "tools") return { ...item, changefreq: "weekly", priority: 0.7 };
-        return { ...item, changefreq: "monthly", priority: 0.5 };
+      // HTML pages only. Google ignores changefreq and priority, and lastmod
+      // is omitted because this site has no per-page modification dates.
+      filter: (page) => {
+        const path = new URL(page).pathname;
+        if (path === "/404" || path === "/404/") return false;
+        if (path.endsWith(".txt")) return false;
+        return true;
       },
     }),
+    {
+      name: "omit-disabled-ads-txt",
+      hooks: {
+        "astro:build:done": async ({ dir }) => {
+          const file = new URL("ads.txt", dir);
+          try {
+            const body = await readFile(file, "utf8");
+            if (body.trim() === "Not found") await unlink(file);
+          } catch (err) {
+            if (err.code !== "ENOENT") throw err;
+          }
+        },
+      },
+    },
   ],
   vite: {
     plugins: [tailwindcss()],

@@ -2,11 +2,16 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { siteConfig } from "../config/site.js";
+import { breadcrumbJsonLd } from "../lib/structuredData.js";
 ---
 
-<BaseLayout title="Terms of Use" description={`Terms for using ${siteConfig.name}'s tools.`}>
+<BaseLayout
+  title="Terms of Use"
+  description={`Terms for using ${siteConfig.name}'s tools.`}
+  jsonLd={[breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Terms of Use" }], siteConfig.url)]}
+>
   <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-    <Breadcrumbs items={[{ label: "Terms of Use" }]} />
+    <Breadcrumbs items={[{ label: "Home", path: "/" }, { label: "Terms of Use" }]} />
     <h1 class="text-2xl font-bold text-navy-900 sm:text-3xl">Terms of Use</h1>
 
     <div class="prose-tool mt-6">

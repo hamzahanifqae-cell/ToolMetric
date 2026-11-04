@@ -13,6 +13,43 @@ const tool = getToolByPath("/tools/converters/mass")!;
   <MassConverter client:load />
 
   <Fragment slot="details">
+    <h2>Common mass conversions</h2>
+    <table>
+      <caption>Mass factors used by this converter</caption>
+      <thead>
+        <tr>
+          <th scope="col">From</th>
+          <th scope="col">Equals</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1 pound</td>
+          <td>0.45359237 kilograms</td>
+        </tr>
+        <tr>
+          <td>1 kilogram</td>
+          <td>2.20462 pounds (rounded)</td>
+        </tr>
+        <tr>
+          <td>1 ounce</td>
+          <td>28.349523125 grams</td>
+        </tr>
+        <tr>
+          <td>1 stone</td>
+          <td>6.35029318 kilograms (14 pounds)</td>
+        </tr>
+        <tr>
+          <td>1 metric tonne</td>
+          <td>1,000 kilograms</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      For length, use the <a href="/tools/converters/length">length converter</a>. For temperature, use the
+      <a href="/tools/converters/temperature">Celsius to Fahrenheit converter</a>.
+    </p>
+
     <h2>Why "mass / weight"?</h2>
     <p>
       Technically, mass (kilograms, pounds) and weight (a force) are different physical quantities, but in everyday
@@ -21,7 +58,7 @@ const tool = getToolByPath("/tools/converters/mass")!;
     </p>
 
     <h2>Worked example</h2>
-    <p>1 kilogram = 2.20462 pounds. 1 stone = 6.35029 kilograms.</p>
+    <p>1 kilogram = 2.20462 pounds (1 ÷ 0.45359237, rounded). 1 stone = 6.35029318 kilograms.</p>
 
     <h2>Assumptions and limitations</h2>
     <ul>

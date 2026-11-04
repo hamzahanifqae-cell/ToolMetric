@@ -4,19 +4,28 @@ import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import { ToolSearch } from "../../components/ToolSearch.js";
 import { TOOLS } from "../../content/tools.js";
 import { siteConfig } from "../../config/site.js";
-import { itemListJsonLd } from "../../lib/structuredData.js";
+import { breadcrumbJsonLd, itemListJsonLd } from "../../lib/structuredData.js";
 
-const description = "Browse every free tool: PNG to JPG, percentage and age calculators, cm to inches, kg to lbs, Celsius to Fahrenheit, and Ohm's law.";
+const description = "Browse every free tool: length and area converters, a current calculator, percentage and age calculators, PNG to JPG, and the rest of the toolkit.";
 ---
 
 <BaseLayout
   title="All Free Online Tools"
   description={description}
   keywords={["free online tools", "percentage calculator", "png to jpg", "unit converter", "ohms law calculator"]}
-  jsonLd={[itemListJsonLd("All free online tools", TOOLS, siteConfig.url)]}
+  jsonLd={[
+    breadcrumbJsonLd(
+      [
+        { name: "Home", path: "/" },
+        { name: "All Tools" },
+      ],
+      siteConfig.url,
+    ),
+    itemListJsonLd("All free online tools", TOOLS, siteConfig.url),
+  ]}
 >
   <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-    <Breadcrumbs items={[{ label: "All Tools" }]} />
+    <Breadcrumbs items={[{ label: "Home", path: "/" }, { label: "All Tools" }]} />
     <h1 class="text-2xl font-bold text-navy-900 sm:text-3xl">All free online tools</h1>
     <p class="mt-2 max-w-2xl text-navy-600">Search or filter by category to find a calculator, converter, or image tool.</p>
     <div class="mt-6">
