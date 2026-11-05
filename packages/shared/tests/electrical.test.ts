@@ -50,6 +50,12 @@ describe("calculatePower", () => {
     if (result.ok) expect(result.value.watts).toBeCloseTo(24);
   });
 
+  it("matches the watts calculator's opening DC example", () => {
+    const result = calculatePower({ mode: "dc", voltage: 230, current: 10 });
+    expect(result.ok).toBe(true);
+    if (result.ok) expect(result.value.watts).toBe(2300);
+  });
+
   it("computes single-phase AC power with power factor", () => {
     const result = calculatePower({ mode: "single-phase-ac", voltage: 230, current: 10, powerFactor: 0.9 });
     expect(result.ok).toBe(true);

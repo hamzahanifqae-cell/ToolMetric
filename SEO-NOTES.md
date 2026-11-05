@@ -169,3 +169,15 @@ On this machine, after the edits:
 This local build did not include the GA4 tag or the AdSense script, because those values are not set in the environment used here. Do not copy this machine's `apps/web/dist` to the server. Build on the server so its `.env` supplies `PUBLIC_GA_MEASUREMENT_ID` and, if ads should return, the AdSense variables.
 
 Not measured: Lighthouse or Core Web Vitals scores, and Search Console indexing after this change. The live site still has the previous deploy until you build and copy it.
+
+## Second pass, 5 November 2026
+
+Page totals supplied without page-filtered queries. Query intent below is a hypothesis except where an earlier site-wide query is named. Titles were left unchanged.
+
+| URL | Evidence | Change |
+| --- | --- | --- |
+| `/tools/calculators/date-difference/` | 18 impressions, 0 clicks, position 7.72. The calculator counts elapsed days. 1 January 2024 to 31 December 2024 is 365 days, 52 weeks and 1 day, or 0 years, 11 months, 30 days. | The line under the heading now states that rule. The example matches the dates the tool opens with. |
+| `/tools/converters/area/` | 13 impressions, position 46.54. No query list for this URL. The converter supports nine units; the old table showed five conversions. | The table now lists every unit and its square-meter factor. The example uses the six-decimal display: 1 m² = 10.76391 ft². |
+| `/tools/electrical/power/` | 19 impressions, position 75.21. “Current calculator” is a site-wide query, not confirmed for this URL. `calculatePower` returns watts from voltage and current. It does not solve for current. | The page says current is an input and links to `/tools/electrical/ohms-law/`. The opening example is the DC default, 230 V and 10 A = 2,300 W. |
+
+Checked live on 5 November 2026: each non-slash URL returns 301 to the slash URL, and the slash URL returns 200. Canonicals and the sitemap already use the slash form. No new redirect was added.

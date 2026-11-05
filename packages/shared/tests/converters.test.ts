@@ -69,4 +69,12 @@ describe("convertArea", () => {
   it("converts acres to square meters", () => {
     expect(convertArea(1, "acre", "square_meter")).toBeCloseTo(4046.8564, 3);
   });
+
+  it("matches the area page's published display values", () => {
+    expect(convertArea(1, "acre", "square_foot")).toBe(43560);
+    expect(Number(convertArea(1, "square_meter", "square_foot").toFixed(6))).toBe(10.76391);
+    expect(Number(convertArea(1, "acre", "square_meter").toFixed(6))).toBe(4046.856422);
+    expect(Number(convertArea(1, "acre", "hectare").toFixed(6))).toBe(0.404686);
+    expect(Number(convertArea(1, "hectare", "acre").toFixed(6))).toBe(2.471054);
+  });
 });

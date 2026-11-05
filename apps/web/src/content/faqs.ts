@@ -94,7 +94,7 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
     {
       question: "How many days are counted between two dates?",
       answer:
-        "The count is the number of days elapsed from the start date to the end date. January 1 to January 2 is 1 day. The result also shows weeks, months, and years.",
+        "The count is the days elapsed from the start date to the end date. 1 January to 2 January is 1 day, and the same date twice is 0 days. Add 1 when you need both dates included. The result also shows weeks, months, and years.",
     },
   ],
   discount: [
@@ -140,7 +140,7 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
     {
       question: "Which area units can I convert?",
       answer:
-        "Square meters, square feet, acres, hectares, and square miles, among the units listed on the converter. Every pair uses the same published conversion factors.",
+        "Square millimeters, square centimeters, square meters, hectares, square kilometers, square feet, square yards, acres, and square miles. One square meter is shown as 10.76391 square feet.",
     },
   ],
   "ohms-law": [
@@ -163,7 +163,7 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
     {
       question: "How are watts calculated from volts and amps?",
       answer:
-        "For DC, watts = volts × amps. For AC, the calculator also uses the power factor, and for balanced three-phase power it uses the line-to-line voltage and line current.",
+        "Enter voltage in volts and current in amps. For DC, watts = volts × amps, so 230 V at 10 A is 2,300 W. For AC, the calculator also uses the power factor. It does not solve for the current.",
     },
   ],
   resistance: [

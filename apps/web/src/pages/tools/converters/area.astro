@@ -13,35 +13,52 @@ const tool = getToolByPath("/tools/converters/area")!;
   <AreaConverter client:load />
 
   <Fragment slot="details">
-    <h2>Common area conversions</h2>
+    <h2>Supported units</h2>
+    <p>Every conversion multiplies by the factor below to reach square meters, then divides by the target unit's factor.</p>
     <table>
-      <caption>Area factors used by this converter</caption>
+      <caption>Square meters in one of each unit</caption>
       <thead>
         <tr>
-          <th scope="col">From</th>
-          <th scope="col">Equals</th>
+          <th scope="col">Unit</th>
+          <th scope="col">Square meters</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>1 acre</td>
-          <td>43,560 square feet</td>
+          <td>Square millimeter (mm²)</td>
+          <td>0.000001</td>
         </tr>
         <tr>
-          <td>1 acre</td>
-          <td>4,046.8564224 square meters</td>
+          <td>Square centimeter (cm²)</td>
+          <td>0.0001</td>
         </tr>
         <tr>
-          <td>1 square meter</td>
-          <td>10.7639 square feet (rounded)</td>
+          <td>Square meter (m²)</td>
+          <td>1</td>
         </tr>
         <tr>
-          <td>1 hectare</td>
-          <td>10,000 square meters</td>
+          <td>Hectare (ha)</td>
+          <td>10,000</td>
         </tr>
         <tr>
-          <td>1 hectare</td>
-          <td>2.47105 acres (rounded)</td>
+          <td>Square kilometer (km²)</td>
+          <td>1,000,000</td>
+        </tr>
+        <tr>
+          <td>Square foot (ft²)</td>
+          <td>0.09290304</td>
+        </tr>
+        <tr>
+          <td>Square yard (yd²)</td>
+          <td>0.83612736</td>
+        </tr>
+        <tr>
+          <td>Acre (ac)</td>
+          <td>4,046.8564224</td>
+        </tr>
+        <tr>
+          <td>Square mile (mi²)</td>
+          <td>2,589,988.110336</td>
         </tr>
       </tbody>
     </table>
@@ -54,7 +71,11 @@ const tool = getToolByPath("/tools/converters/area")!;
     </p>
 
     <h2>Worked example</h2>
-    <p>1 acre = 4,046.86 square meters = 0.4047 hectares. 1 square meter = 10.7639 square feet.</p>
+    <p>
+      The converter opens on 1 square meter, which it shows as 10.76391 square feet. One acre is exactly 43,560 square
+      feet, 4,046.856422 square meters, and 0.404686 hectares at the same six-decimal display. One hectare is 2.471054
+      acres at that display.
+    </p>
 
     <h2>Assumptions and limitations</h2>
     <ul>

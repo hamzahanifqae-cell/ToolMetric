@@ -8,23 +8,23 @@ const tool = getToolByPath("/tools/calculators/date-difference")!;
 
 <ToolLayout
   tool={tool}
-  purpose="Count the days between two dates, and see that span in weeks, months, and years as well."
+  purpose="Count the days elapsed from the start date to the end date. 1 January to 2 January is 1 day, and the same date on both sides is 0 days."
 >
   <DateDifferenceCalculator client:load />
 
   <Fragment slot="details">
-    <h2>Date inclusion rule</h2>
+    <h2>Are the start and end dates included?</h2>
     <p>
-      This tool reports the number of days <em>between</em> two dates — an "exclusive" count, like counting nights
-      between a check-in and check-out date. January 1 to January 2 is reported as 1 day, not 2. If you need an
-      "inclusive" count where both endpoints are counted, add 1 to the total days shown.
+      No. The result is the number of days from the start date up to the end date, the same way a hotel stay counts
+      nights between check-in and check-out. 1 January to 2 January is 1 day. Entering the same date twice is 0 days.
+      Add 1 to the total when you need both the start date and the end date included.
     </p>
 
     <h2>Worked example</h2>
     <p>
-      From January 1, 2024 to December 31, 2024 is 365 days (2024 is a leap year, but Feb 29 falls inside this
-      range and is already counted correctly since the calculation works from actual calendar dates, not a fixed
-      365-day assumption).
+      The calculator opens on 1 January 2024 to 31 December 2024. That span is 365 days, shown as 52 weeks and 1 day,
+      or 0 years, 11 months, and 30 days. 2024 includes 29 February, and that day is inside the span. Counting both
+      endpoints as well makes it 366 days.
     </p>
 
     <h2>Assumptions and limitations</h2>

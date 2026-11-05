@@ -38,4 +38,19 @@ describe("calculateDateDifference", () => {
     expect(result.ok).toBe(true);
     if (result.ok) expect(result.value.totalDays).toBe(0);
   });
+
+  it("matches the published 1 January to 31 December 2024 example", () => {
+    const result = calculateDateDifference("2024-01-01", "2024-12-31");
+    expect(result.ok).toBe(true);
+    if (result.ok) {
+      expect(result.value).toEqual({
+        totalDays: 365,
+        weeks: 52,
+        remainderDays: 1,
+        years: 0,
+        months: 11,
+        days: 30,
+      });
+    }
+  });
 });
