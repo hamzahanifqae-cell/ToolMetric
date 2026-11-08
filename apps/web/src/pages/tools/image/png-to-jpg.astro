@@ -35,12 +35,12 @@ const tool = getToolByPath("/tools/image/png-to-jpg")!;
       <li>Very large images (beyond roughly 40 megapixels) are rejected to keep processing fast and memory-safe.</li>
     </ul>
 
-    <h2>Local vs. server processing</h2>
+    <h2>Accepted inputs</h2>
+    <p>One PNG, up to 25 MB and about 40 million pixels. JPG output has no transparency, so the background color starts at white.</p>
+
+    <h2>When the file leaves your device</h2>
     <p>
-      By default this runs entirely on your device using the browser's Canvas API. If your browser can't complete
-      the conversion (for example, an older browser without the required APIs), you can explicitly choose "Upload to
-      our server for processing," which sends the file to our API, converts it with the Sharp image library, and
-      deletes the file afterward.
+      Choosing a file and seeing the preview keeps it on your device. It stays there while "Process on your device (default)" is selected. The file is sent only if you select "Upload to our server for processing" and then press Convert. The server holds that file in memory for the one request and does not write it to disk. A failure on your device does not upload the file by itself.
     </p>
   </Fragment>
 </ToolLayout>

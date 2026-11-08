@@ -29,7 +29,7 @@ const tool = getToolByPath("/tools/converters/mass")!;
         </tr>
         <tr>
           <td>1 kilogram</td>
-          <td>2.20462 pounds (rounded)</td>
+          <td>2.204623 pounds</td>
         </tr>
         <tr>
           <td>1 ounce</td>
@@ -57,8 +57,15 @@ const tool = getToolByPath("/tools/converters/mass")!;
       tool converts mass units, labelled as "mass / weight" to match how people actually search for it.
     </p>
 
-    <h2>Worked example</h2>
-    <p>1 kilogram = 2.20462 pounds (1 ÷ 0.45359237, rounded). 1 stone = 6.35029318 kilograms.</p>
+    <h2>Accepted inputs</h2>
+    <p>
+      One number, then any two of milligram, gram, kilogram, metric tonne, ounce, pound, and stone. The converter opens on 1 kilogram to pounds.
+    </p>
+
+    <h2>How to read the result</h2>
+    <p>
+      The figure is shown to six decimal places. 1 kilogram is 2.204623 pounds on that display. The exact factor is 1 lb = 0.45359237 kg, and 1 ÷ 0.45359237 is 2.2046226218… before that rounding. 1 stone = 6.35029318 kilograms.
+    </p>
 
     <h2>Assumptions and limitations</h2>
     <ul>

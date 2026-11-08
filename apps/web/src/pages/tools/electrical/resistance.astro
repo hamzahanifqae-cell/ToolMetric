@@ -19,10 +19,19 @@ const tool = getToolByPath("/tools/electrical/resistance")!;
       <li>Parallel: <code>1 / R_total = 1/R1 + 1/R2 + ... + 1/Rn</code></li>
     </ul>
 
+    <h2>Accepted inputs</h2>
+    <p>
+      One or more resistance values in ohms. Negative values are rejected. The calculator opens in parallel mode with 100 Ω and 220 Ω.
+    </p>
+
+    <h2>How to read the result</h2>
+    <p>The single figure is the combined resistance for the mode you selected, shown to four decimal places when needed.</p>
+
     <h2>Worked examples</h2>
     <ul>
-      <li>Series: 100Ω + 220Ω = 320Ω.</li>
-      <li>Parallel: two 10Ω resistors → 1/R_total = 1/10 + 1/10 = 1/5 → R_total = 5Ω.</li>
+      <li>The opening pair in parallel: 1/100 + 1/220 = 4/275, so the total is 68.75 Ω.</li>
+      <li>The same pair in series: 100 Ω + 220 Ω = 320 Ω.</li>
+      <li>Two 10 Ω resistors in parallel: 1/10 + 1/10 = 1/5, so the total is 5 Ω.</li>
     </ul>
 
     <h2>Assumptions and limitations</h2>

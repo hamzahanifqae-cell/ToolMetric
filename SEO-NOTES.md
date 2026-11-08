@@ -184,7 +184,7 @@ Checked live on 5 November 2026: each non-slash URL returns 301 to the slash URL
 
 ## AdSense readiness, 8 November 2026
 
-The site has 18 tools, not a 21-tool inventory. Publisher on the About and Contact pages is Hamza Hanif. The brand name remains ToolMetric. The approved public email is hamzahanifadsense@gmail.com, shown as text and a mailto link on Contact and About.
+The site has 18 tools. The tool directory, the 18 tool routes, the navigation, the homepage count, and the sitemap all match. Git history has no deleted tool page, so the earlier figure of 21 was not a set of retired routes. Category pages are separate from that count. Publisher on the About and Contact pages is Hamza Hanif. The brand name remains ToolMetric. The approved public email is hamzahanifadsense@gmail.com, shown as text and a mailto link on Contact and About.
 
 Contact is `/contact/`. There is no form and no success message. Privacy stays at `https://toolmetric.online/privacy/` and is linked from the footer. The policy states that third-party vendors, including Google, use cookies to serve ads based on prior visits, and that Google's advertising cookies allow Google and its partners to use those visits to select ads. The only ad service in the project is Google AdSense. Personalized-ad controls: https://myadcenter.google.com/
 

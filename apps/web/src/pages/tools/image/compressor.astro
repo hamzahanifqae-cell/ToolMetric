@@ -21,8 +21,7 @@ const tool = getToolByPath("/tools/image/compressor")!;
 
     <h2>Worked example</h2>
     <p>
-      A 3 MB PNG photo compressed to JPEG at quality 75 might result in a 300–500 KB file with little visible
-      difference; at quality 20, the file shrinks further but artifacts become noticeable.
+      The tool opens on JPEG at quality 75, with a white background for transparent pixels. Quality can be set from 1 to 100. A lower number usually makes a smaller file and more visible artifacts. The output size still depends on the picture, so a quality number is not a promise of a particular file size.
     </p>
 
     <h2>Assumptions and limitations</h2>
@@ -33,10 +32,12 @@ const tool = getToolByPath("/tools/image/compressor")!;
       <li>Transparent areas are filled with your chosen background color only when compressing to JPEG (WebP keeps transparency).</li>
     </ul>
 
-    <h2>Local vs. server processing</h2>
+    <h2>Accepted inputs</h2>
+    <p>One PNG, JPG, or WebP, up to 25 MB and about 40 million pixels. Output is JPEG or WebP, not PNG.</p>
+
+    <h2>When the file leaves your device</h2>
     <p>
-      Compression runs on your device by default. The explicit server option re-encodes the file with Sharp on our
-      API and deletes it afterward.
+      Choosing a file and seeing the preview keeps it on your device. It stays there while "Process on your device (default)" is selected. The file is sent only if you select "Upload to our server for processing" and then press Compress. The server holds that file in memory for the one request and does not write it to disk. A failure on your device does not upload the file by itself.
     </p>
   </Fragment>
 </ToolLayout>

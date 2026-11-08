@@ -33,10 +33,14 @@ const tool = getToolByPath("/tools/image/resizer")!;
       <li>Choosing JPEG output flattens transparency onto your chosen background color; PNG and WebP preserve it.</li>
     </ul>
 
-    <h2>Local vs. server processing</h2>
+    <h2>Accepted inputs</h2>
     <p>
-      Resizing runs on your device by default, using the browser's Canvas API. The explicit server option resizes
-      the file with Sharp on our API and deletes it afterward.
+      One PNG, JPG, or WebP, up to 25 MB and about 40 million pixels. Width and height are limited to 10,000 pixels. The form opens with width 800, height blank, aspect ratio locked, and PNG output. A 1600×900 image at those settings becomes 800×450.
+    </p>
+
+    <h2>When the file leaves your device</h2>
+    <p>
+      Choosing a file and seeing the preview keeps it on your device. It stays there while "Process on your device (default)" is selected. The file is sent only if you select "Upload to our server for processing" and then press Resize. The server holds that file in memory for the one request and does not write it to disk. A failure on your device does not upload the file by itself.
     </p>
   </Fragment>
 </ToolLayout>

@@ -8,7 +8,7 @@ const tool = getToolByPath("/tools/image/to-webp")!;
 
 <ToolLayout
   tool={tool}
-  purpose="Convert a JPG or PNG file to the modern WebP format, which typically produces smaller files at comparable visual quality."
+  purpose="Convert a JPG or PNG file to WebP. PNG transparency is kept. The new file size depends on the picture."
 >
   <ConvertImageTool client:load acceptAttr="image/jpeg,image/png" acceptedLabel="JPG or PNG" outputFormat="webp" />
 
@@ -21,8 +21,7 @@ const tool = getToolByPath("/tools/image/to-webp")!;
 
     <h2>Worked example</h2>
     <p>
-      A 2000×1500 JPG photo saved at typical quality is often 30–50% smaller as a WebP at a visually similar
-      quality, though the exact savings depend heavily on the image content.
+      A 2000×1500 JPG or PNG is re-encoded as a 2000×1500 WebP. PNG transparency is kept. The byte size depends on the picture; this page does not promise a percentage.
     </p>
 
     <h2>Assumptions and limitations</h2>
@@ -33,10 +32,12 @@ const tool = getToolByPath("/tools/image/to-webp")!;
       <li>Animated inputs are not supported — only a single static image is produced.</li>
     </ul>
 
-    <h2>Local vs. server processing</h2>
+    <h2>Accepted inputs</h2>
+    <p>One JPG or PNG, up to 25 MB and about 40 million pixels.</p>
+
+    <h2>When the file leaves your device</h2>
     <p>
-      This runs on your device by default. The explicit "Upload to our server for processing" option sends the file
-      to our API (built with Sharp) and deletes it afterward — useful as a fallback if local processing fails.
+      Choosing a file and seeing the preview keeps it on your device. It stays there while "Process on your device (default)" is selected. The file is sent only if you select "Upload to our server for processing" and then press Convert. The server holds that file in memory for the one request and does not write it to disk. A failure on your device does not upload the file by itself.
     </p>
   </Fragment>
 </ToolLayout>

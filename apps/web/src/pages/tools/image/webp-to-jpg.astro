@@ -32,10 +32,12 @@ const tool = getToolByPath("/tools/image/webp-to-jpg")!;
       <li>Only the first frame of an animated WebP is converted.</li>
     </ul>
 
-    <h2>Local vs. server processing</h2>
+    <h2>Accepted inputs</h2>
+    <p>One WebP, up to 25 MB and about 40 million pixels. The background color for transparent pixels starts at white.</p>
+
+    <h2>When the file leaves your device</h2>
     <p>
-      This runs on your device by default. The explicit server option uploads the file to our API (using Sharp) and
-      deletes it afterward — useful if local decoding fails.
+      Choosing a file and seeing the preview keeps it on your device. It stays there while "Process on your device (default)" is selected. The file is sent only if you select "Upload to our server for processing" and then press Convert. The server holds that file in memory for the one request and does not write it to disk. A failure on your device does not upload the file by itself.
     </p>
   </Fragment>
 </ToolLayout>
