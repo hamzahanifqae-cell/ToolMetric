@@ -23,9 +23,14 @@ interface Props {
    */
   keywords?: string[];
   jsonLd?: Record<string, unknown>[];
+  /**
+   * Privacy policy pages must not load an ad tag or the analytics tag.
+   * Other pages keep both.
+   */
+  thirdPartyScripts?: boolean;
 }
 
-const { title, description, index = allowIndexing, jsonLd = [] } = Astro.props;
+const { title, description, index = allowIndexing, jsonLd = [], thirdPartyScripts = true } = Astro.props;
 const canonicalUrl = new URL(Astro.url.pathname, siteConfig.url).toString();
 const pageTitle = title === siteConfig.name ? title : `${title} | ${siteConfig.name}`;
 const socialImage = new URL("/og.png", siteConfig.url).toString();
@@ -66,7 +71,7 @@ const robotsContent = index
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     {jsonLd.map((data) => <script type="application/ld+json" set:html={serializeJsonLd(data)} />)}
 
-    {siteConfig.gaMeasurementId && (
+    {thirdPartyScripts && siteConfig.gaMeasurementId && (
       <>
         <script
           is:inline
@@ -82,7 +87,7 @@ const robotsContent = index
       </>
     )}
 
-    {siteConfig.adsenseEnabled && siteConfig.adsenseClientId && (
+    {thirdPartyScripts && siteConfig.adsenseEnabled && siteConfig.adsenseClientId && (
       <script
         is:inline
         async
