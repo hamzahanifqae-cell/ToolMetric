@@ -10,11 +10,16 @@ const category = CATEGORIES.calculators;
 const tools = getToolsByCategory("calculators");
 ---
 
-<BaseLayout title={category.heading} description={category.description} keywords={category.keywords} jsonLd={[breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "All Tools", path: "/tools" }, { name: category.label }], siteConfig.url), itemListJsonLd(category.heading, tools, siteConfig.url)]}>
+<BaseLayout title={category.heading} description={category.description} keywords={category.keywords} jsonLd={[breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "All Tools", path: "/tools/" }, { name: category.label }], siteConfig.url), itemListJsonLd(category.heading, tools, siteConfig.url)]}>
   <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-    <Breadcrumbs items={[{ label: "Home", path: "/" }, { label: "All Tools", path: "/tools" }, { label: category.label }]} />
+    <Breadcrumbs items={[{ label: "Home", path: "/" }, { label: "All Tools", path: "/tools/" }, { label: category.label }]} />
     <h1 class="text-2xl font-bold text-navy-900 sm:text-3xl">{category.heading}</h1>
     <p class="mt-2 max-w-2xl text-navy-600">{category.description}</p>
+    <p class="mt-3 max-w-2xl text-sm text-navy-600">
+      Percentage works out a percent of a number, what percent one number is of another, and the change between two numbers.
+      Age counts years, months, and days from a birth date. Days between dates counts the days elapsed from the start date to the end date, and the same date twice is 0.
+      Discount turns a percent off into a sale price and the amount saved. Each one runs in the browser.
+    </p>
     <CategoryToolGrid tools={tools} />
   </div>
 </BaseLayout>

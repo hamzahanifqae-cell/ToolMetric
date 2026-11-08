@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { siteConfig } from "../config/site.js";
+import { breadcrumbJsonLd } from "../lib/structuredData.js";
+---
+
+<BaseLayout
+  title="Contact"
+  description={`Contact ${siteConfig.name}. The site is published by ${siteConfig.operatorName}. Email ${siteConfig.operatorEmail}.`}
+  jsonLd={[breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Contact" }], siteConfig.url)]}
+>
+  <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6">
+    <Breadcrumbs items={[{ label: "Home", path: "/" }, { label: "Contact" }]} />
+    <h1 class="text-2xl font-bold text-navy-900 sm:text-3xl">Contact</h1>
+
+    <div class="prose-tool mt-6">
+      <h2>Publisher</h2>
+      <p>{siteConfig.name} is published by {siteConfig.operatorName}.</p>
+
+      <h2>Email</h2>
+      {
+        siteConfig.operatorEmail ? (
+          <p>
+            <a href={`mailto:${siteConfig.operatorEmail}`} class="font-semibold text-teal-700 underline">
+              {siteConfig.operatorEmail}
+            </a>
+          </p>
+        ) : (
+          <p>No public email address is listed.</p>
+        )
+      }
+      <p>This page does not include a contact form, and it does not store a message.</p>
+      <p>
+        More about who runs the site is on the <a href="/about/">about page</a>. How visits, ads, and files are handled
+        is in the <a href="/privacy/">privacy policy</a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

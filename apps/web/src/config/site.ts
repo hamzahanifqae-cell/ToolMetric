@@ -3,11 +3,11 @@ import { validateProductionUrl, validateOperatorEmail, parseGoogleSiteVerificati
 /**
  * Centralized, typed public operator/launch configuration. `PUBLIC_SITE_URL`
  * must be real before a release build will even complete — see
- * `launchBlockers`. Publishing an operator name/email is optional and
- * entirely the site owner's choice: unset is a valid, supported state (the
- * About/Contact copy says so plainly rather than inventing a placeholder),
- * not something this build enforces or nags about. A *provided* email is
- * still validated, though — a typo is a bug, not a privacy choice.
+ * `launchBlockers`. The publisher name and public contact email have
+ * approved defaults. `PUBLIC_OPERATOR_EMAIL` can replace the address, and
+ * a provided value is still validated — a typo is a bug, not a privacy
+ * choice. Validation is syntactic only and does not prove the mailbox
+ * receives mail.
  */
 
 const DEV_FALLBACK_SITE_URL = "http://localhost:4321";
@@ -22,6 +22,16 @@ const rawOperatorEmail = readEnv("PUBLIC_OPERATOR_EMAIL");
 const emailCheck = rawOperatorEmail ? validateOperatorEmail(rawOperatorEmail) : undefined;
 const verificationCheck = parseGoogleSiteVerification(readEnv("PUBLIC_GOOGLE_SITE_VERIFICATION"));
 const gaCheck = parseGaMeasurementId(readEnv("PUBLIC_GA_MEASUREMENT_ID"));
+
+/** Confirmed publisher. The brand name stays ToolMetric. */
+export const publisherName = "Hamza Hanif";
+
+/** Public contact address approved for the site. An env override still has to pass validation. */
+export const publicContactEmail = "hamzahanifadsense@gmail.com";
+const approvedEmail = validateOperatorEmail(publicContactEmail);
+if (!approvedEmail.ok) {
+  throw new Error(approvedEmail.error);
+}
 
 export const siteConfig = {
   name: readEnv("PUBLIC_SITE_NAME") ?? "ToolMetric",
@@ -38,17 +48,15 @@ export const siteConfig = {
   usingFallbackUrl: !urlCheck.ok,
   siteUrlError: urlCheck.ok ? undefined : urlCheck.error,
 
-  operatorName: readEnv("PUBLIC_OPERATOR_NAME"),
+  operatorName: readEnv("PUBLIC_OPERATOR_NAME") ?? publisherName,
 
   /**
-   * Set only when PUBLIC_OPERATOR_EMAIL is both provided and passes syntax
-   * validation — an invalid address is never published as if it were real
-   * (e.g. as a mailto: link). Unset is a normal, supported state (no
-   * error); `operatorEmailError` is only set when a value was provided but
-   * rejected. Validation is syntactic only: it does not confirm the
-   * mailbox exists or receives mail.
+   * The approved public address, unless PUBLIC_OPERATOR_EMAIL replaces it
+   * with another address that passes validation. An invalid override is
+   * never published. `operatorEmailError` is set only when a value was
+   * provided and rejected.
    */
-  operatorEmail: emailCheck?.ok ? emailCheck.value : undefined,
+  operatorEmail: emailCheck?.ok ? emailCheck.value : rawOperatorEmail ? undefined : approvedEmail.value,
   operatorEmailError: emailCheck && !emailCheck.ok ? emailCheck.error : undefined,
 
   /**
@@ -108,8 +116,8 @@ export const launchBlockers: string[] = [
  * operator identity, are both supported, intentional states).
  */
 export const launchAdvisories: string[] = [
-  !siteConfig.operatorName && !siteConfig.operatorEmail
-    ? "No public operator name/email is configured — About and Contact-related copy will say so rather than publish a placeholder. This is fine if that's intentional."
+  !siteConfig.operatorEmail
+    ? "PUBLIC_OPERATOR_EMAIL is set but invalid, so the approved public address was not used."
     : undefined,
   siteConfig.adsenseEnabled && !siteConfig.adsenseClientId
     ? "PUBLIC_ADSENSE_ENABLED is true but PUBLIC_ADSENSE_CLIENT_ID is not set, so the ad slot component will still render nothing."

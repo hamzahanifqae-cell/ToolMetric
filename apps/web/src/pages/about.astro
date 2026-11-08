@@ -37,19 +37,23 @@ import { breadcrumbJsonLd } from "../lib/structuredData.js";
         not a black box.
       </p>
 
-      {
-        siteConfig.operatorName ? (
-          <>
-            <h2>Who runs this site</h2>
-            <p>{siteConfig.name} is operated by {siteConfig.operatorName}.</p>
-          </>
-        ) : (
-          <>
-            <h2>Who runs this site</h2>
-            <p>Specific operator contact details are not published on this site.</p>
-          </>
-        )
-      }
+      <h2>Who runs this site</h2>
+      <p>
+        {siteConfig.name} is published by {siteConfig.operatorName}. The site name stays {siteConfig.name}.{" "}
+        {
+          siteConfig.operatorEmail && (
+            <>
+              Email{" "}
+              <a href={`mailto:${siteConfig.operatorEmail}`} class="font-semibold text-teal-700 underline">
+                {siteConfig.operatorEmail}
+              </a>
+              .{" "}
+            </>
+          )
+        }
+        The <a href="/contact/">contact page</a> repeats that address, and the{" "}
+        <a href="/privacy/">privacy policy</a> describes ads, analytics, and file handling.
+      </p>
     </div>
   </div>
 </BaseLayout>

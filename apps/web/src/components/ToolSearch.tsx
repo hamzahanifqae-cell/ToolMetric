@@ -1,6 +1,6 @@
 import { ToolCard } from "./ToolCard.js";
 import { useMemo, useState } from "react";
-import { CATEGORIES, TOOLS, type ToolCategory } from "../content/tools.js";
+import { CATEGORIES, TOOLS, pagePath, type ToolCategory } from "../content/tools.js";
 import { inputClass, selectClass } from "./ui/inputClasses.js";
 
 export function ToolSearch({ compact = false }: { compact?: boolean }) {
@@ -61,7 +61,7 @@ export function ToolSearch({ compact = false }: { compact?: boolean }) {
       <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {results.map((tool) => (
           <li key={tool.path}>
-            <ToolCard title={tool.title} href={tool.path} category={tool.category} icon={tool.slug} />
+            <ToolCard title={tool.title} href={pagePath(tool.path)} category={tool.category} icon={tool.slug} />
           </li>
         ))}
       </ul>

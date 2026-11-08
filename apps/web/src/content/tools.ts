@@ -253,12 +253,19 @@ export const TOOLS: ToolMeta[] = [
   },
 ];
 
+/** Canonical site paths use a trailing slash. Lookups accept either form. */
+export function pagePath(path: string): string {
+  if (path === "/" || path.endsWith("/")) return path;
+  return `${path}/`;
+}
+
 export function getToolsByCategory(category: ToolCategory): ToolMeta[] {
   return TOOLS.filter((t) => t.category === category);
 }
 
 export function getToolByPath(path: string): ToolMeta | undefined {
-  return TOOLS.find((t) => t.path === path);
+  const normalized = path.length > 1 && path.endsWith("/") ? path.slice(0, -1) : path;
+  return TOOLS.find((t) => t.path === normalized);
 }
 
 export function getRelatedTools(tool: ToolMeta, limit = 3): ToolMeta[] {

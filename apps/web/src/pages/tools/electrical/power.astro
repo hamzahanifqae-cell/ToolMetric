@@ -17,7 +17,7 @@ const tool = getToolByPath("/tools/electrical/power")!;
     <p>
       Enter voltage in volts and current in amps. The result is real power in watts and kilowatts. This page does not
       solve for current. For amps from voltage and resistance, use the
-      <a href="/tools/electrical/ohms-law">current calculator</a>.
+      <a href="/tools/electrical/ohms-law/">current calculator</a>.
     </p>
 
     <h2>Formulas</h2>
@@ -34,6 +34,16 @@ const tool = getToolByPath("/tools/electrical/power")!;
       <li>Single-phase AC: 230 V at 10 A with power factor 0.9 is 2,070 W. Switch to that mode before using the power factor.</li>
       <li>Three-phase AC: 400 V line-to-line, 10 A line current, and power factor 1.0 is 6,928.2032 W (6.9282 kW).</li>
     </ul>
+
+    <h2>Accepted inputs</h2>
+    <p>
+      Voltage in volts and current in amps must be zero or a positive number. A blank or non-numeric field shows an error instead of a watt value. Single-phase and three-phase modes also need a power factor greater than 0 and no greater than 1. DC mode ignores power factor.
+    </p>
+
+    <h2>How to read the result</h2>
+    <p>
+      2,300 W is real power for the opening DC example, and 2.3 kW is the same quantity divided by 1,000. The result is not amps, volts, apparent power in VA, or reactive power in VAR.
+    </p>
 
     <h2>Important distinctions</h2>
     <ul>

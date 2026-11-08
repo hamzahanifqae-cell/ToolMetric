@@ -27,6 +27,16 @@ const tool = getToolByPath("/tools/calculators/date-difference")!;
       endpoints as well makes it 366 days.
     </p>
 
+    <h2>Accepted inputs</h2>
+    <p>
+      Two calendar dates. The fields use the browser's date control, stored as year-month-day. A date that does not exist, such as 31 February, is rejected. There is no time of day.
+    </p>
+
+    <h2>How to read the result</h2>
+    <p>
+      The large number is the elapsed day count. "52 wk 1 d" splits that same count into weeks. The years, months, and days line is calendar arithmetic, so a month is not a fixed number of days and that line will not always multiply back to the day count.
+    </p>
+
     <h2>Assumptions and limitations</h2>
     <ul>
       <li>If the end date is earlier than the start date, the tool still works — it swaps them before calculating, so the result is always a positive difference.</li>

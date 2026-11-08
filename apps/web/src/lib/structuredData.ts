@@ -14,13 +14,22 @@ export function serializeJsonLd(data: unknown): string {
   return JSON.stringify(data).replace(/</g, "\\u003c");
 }
 
-export function websiteJsonLd(name: string, siteUrl: string, description: string): Record<string, unknown> {
+export function websiteJsonLd(
+  name: string,
+  siteUrl: string,
+  description: string,
+  publisher: string,
+): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name,
     url: siteUrl.endsWith("/") ? siteUrl : `${siteUrl}/`,
     description,
+    publisher: {
+      "@type": "Person",
+      name: publisher,
+    },
   };
 }
 

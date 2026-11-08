@@ -18,7 +18,6 @@ function readEnv(key) {
 }
 
 const urlCheck = validateProductionUrl(readEnv("PUBLIC_SITE_URL"));
-const operatorName = readEnv("PUBLIC_OPERATOR_NAME");
 const rawOperatorEmail = readEnv("PUBLIC_OPERATOR_EMAIL");
 // Operator identity is optional and the site owner's choice — not a
 // blocker. A *provided* email is still validated: a typo is a bug, not a
@@ -37,10 +36,8 @@ if (!verificationCheck.ok) blockers.push(`PUBLIC_GOOGLE_SITE_VERIFICATION: ${ver
 if (!gaCheck.ok) blockers.push(`PUBLIC_GA_MEASUREMENT_ID: ${gaCheck.error}`);
 
 const advisories = [];
-if (!operatorName && !rawOperatorEmail) {
-  advisories.push(
-    "No public operator name/email is configured — About/Contact-related copy will say so rather than publish a placeholder. Fine if that's intentional."
-  );
+if (rawOperatorEmail && emailCheck && !emailCheck.ok) {
+  advisories.push("PUBLIC_OPERATOR_EMAIL is set but invalid, so the site will not publish that address.");
 }
 if (robotsPolicy === "noindex") {
   advisories.push('PUBLIC_ROBOTS_POLICY=noindex — this build will tell search engines not to index it. Remove this for the final public launch.');

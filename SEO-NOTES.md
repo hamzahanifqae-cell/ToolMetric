@@ -181,3 +181,15 @@ Page totals supplied without page-filtered queries. Query intent below is a hypo
 | `/tools/electrical/power/` | 19 impressions, position 75.21. “Current calculator” is a site-wide query, not confirmed for this URL. `calculatePower` returns watts from voltage and current. It does not solve for current. | The page says current is an input and links to `/tools/electrical/ohms-law/`. The opening example is the DC default, 230 V and 10 A = 2,300 W. |
 
 Checked live on 5 November 2026: each non-slash URL returns 301 to the slash URL, and the slash URL returns 200. Canonicals and the sitemap already use the slash form. No new redirect was added.
+
+## AdSense readiness, 8 November 2026
+
+The site has 18 tools, not a 21-tool inventory. Publisher on the About and Contact pages is Hamza Hanif. The brand name remains ToolMetric. The approved public email is hamzahanifadsense@gmail.com, shown as text and a mailto link on Contact and About.
+
+Contact is `/contact/`. There is no form and no success message. Privacy stays at `https://toolmetric.online/privacy/` and is linked from the footer. The policy states that third-party vendors, including Google, use cookies to serve ads based on prior visits, and that Google's advertising cookies allow Google and its partners to use those visits to select ads. The only ad service in the project is Google AdSense. Personalized-ad controls: https://myadcenter.google.com/
+
+No consent-management script is in the repository. The European regulations message "ToolMetric European regulations" was published in AdSense on 8 November 2026 for toolmetric.online, with the privacy policy URL above. Do not add a second CMP.
+
+Menus, cards, breadcrumbs, and in-content links now use the trailing-slash canonical path. Non-slash addresses still 301.
+
+A fresh visit to the homepage, then "Find your tool", stays on `/tools/` and lists all 18 tools. The age calculator is one of those links. No service worker is registered, and the tools page has no refresh redirect. The unintended jump to the age calculator was not reproduced.

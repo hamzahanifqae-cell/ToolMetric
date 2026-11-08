@@ -1,6 +1,6 @@
 ---
 import { ToolCard } from "./ToolCard.js";
-import type { ToolMeta } from "../content/tools.js";
+import { pagePath, type ToolMeta } from "../content/tools.js";
 
 interface Props {
   tools: ToolMeta[];
@@ -13,7 +13,7 @@ const { tools } = Astro.props;
   {
     tools.map((tool) => (
       <li>
-        <ToolCard title={tool.title} href={tool.path} category={tool.category} icon={tool.slug} />
+        <ToolCard title={tool.title} href={pagePath(tool.path)} category={tool.category} icon={tool.slug} />
       </li>
     ))
   }
