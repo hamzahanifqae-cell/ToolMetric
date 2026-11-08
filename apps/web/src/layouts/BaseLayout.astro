@@ -96,13 +96,8 @@ const robotsContent = index
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${siteConfig.adsenseClientId}`}
           crossorigin="anonymous"
         ></script>
-        <script
-          is:inline
-          async
-          src={`https://fundingchoicesmessages.google.com/i/${siteConfig.adsenseClientId.replace(/^ca-/, "")}?ers=1`}
-        ></script>
         <script is:inline>
-          {`(function () {
+          (function () {
             function signalGooglefcPresent() {
               if (window.frames["googlefcPresent"]) return;
               if (!document.body) {
@@ -117,8 +112,31 @@ const robotsContent = index
               document.body.appendChild(frame);
             }
             signalGooglefcPresent();
-          })();`}
+            window.googlefc = window.googlefc || {};
+            window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+            window.googlefc.callbackQueue.push({
+              CONSENT_API_READY: function () {
+                function arm() {
+                  var button = document.getElementById("privacy-choices");
+                  if (!button) {
+                    setTimeout(arm, 0);
+                    return;
+                  }
+                  button.hidden = false;
+                  button.addEventListener("click", function () {
+                    window.googlefc.showRevocationMessage();
+                  });
+                }
+                arm();
+              },
+            });
+          })();
         </script>
+        <script
+          is:inline
+          async
+          src={`https://fundingchoicesmessages.google.com/i/${siteConfig.adsenseClientId.replace(/^ca-/, "")}?ers=1`}
+        ></script>
       </>
     )}
   </head>

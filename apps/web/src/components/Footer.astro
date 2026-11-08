@@ -65,24 +65,4 @@ const showPrivacyChoices =
       }
     </div>
   </div>
-  {
-    showPrivacyChoices && (
-      <script is:inline>
-        {`(function () {
-          window.googlefc = window.googlefc || {};
-          window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
-          window.googlefc.callbackQueue.push({
-            CONSENT_API_READY: function () {
-              var button = document.getElementById("privacy-choices");
-              if (!button) return;
-              button.hidden = false;
-              button.addEventListener("click", function () {
-                window.googlefc.showRevocationMessage();
-              });
-            },
-          });
-        })();`}
-      </script>
-    )
-  }
 </footer>
