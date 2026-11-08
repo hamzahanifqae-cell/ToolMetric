@@ -69,6 +69,7 @@ const robotsContent = index
     <meta name="twitter:image:alt" content={`${siteConfig.name}: free calculators, converters, and image tools`} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     {jsonLd.map((data) => <script type="application/ld+json" set:html={serializeJsonLd(data)} />)}
 
     {thirdPartyScripts && siteConfig.gaMeasurementId && (
@@ -88,12 +89,37 @@ const robotsContent = index
     )}
 
     {thirdPartyScripts && siteConfig.adsenseEnabled && siteConfig.adsenseClientId && (
-      <script
-        is:inline
-        async
-        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${siteConfig.adsenseClientId}`}
-        crossorigin="anonymous"
-      ></script>
+      <>
+        <script
+          is:inline
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${siteConfig.adsenseClientId}`}
+          crossorigin="anonymous"
+        ></script>
+        <script
+          is:inline
+          async
+          src={`https://fundingchoicesmessages.google.com/i/${siteConfig.adsenseClientId.replace(/^ca-/, "")}?ers=1`}
+        ></script>
+        <script is:inline>
+          {`(function () {
+            function signalGooglefcPresent() {
+              if (window.frames["googlefcPresent"]) return;
+              if (!document.body) {
+                setTimeout(signalGooglefcPresent, 0);
+                return;
+              }
+              var frame = document.createElement("iframe");
+              frame.name = "googlefcPresent";
+              frame.title = "";
+              frame.setAttribute("aria-hidden", "true");
+              frame.style.cssText = "width:0;height:0;border:none;display:none;position:absolute;left:-1000px;top:-1000px;";
+              document.body.appendChild(frame);
+            }
+            signalGooglefcPresent();
+          })();`}
+        </script>
+      </>
     )}
   </head>
   <body class="flex min-h-screen flex-col">
