@@ -92,50 +92,51 @@ const robotsContent = index
       <>
         <script
           is:inline
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${siteConfig.adsenseClientId}`}
-          crossorigin="anonymous"
-        ></script>
-        <script is:inline>
+          define:vars={{ publisherId: siteConfig.adsenseClientId.replace(/^ca-/, "") }}
+        >
           (function () {
-            function signalGooglefcPresent() {
-              if (window.frames["googlefcPresent"]) return;
-              if (!document.body) {
-                setTimeout(signalGooglefcPresent, 0);
-                return;
-              }
-              var frame = document.createElement("iframe");
-              frame.name = "googlefcPresent";
-              frame.title = "";
-              frame.setAttribute("aria-hidden", "true");
-              frame.style.cssText = "width:0;height:0;border:none;display:none;position:absolute;left:-1000px;top:-1000px;";
-              document.body.appendChild(frame);
-            }
-            signalGooglefcPresent();
+            var allowedTypes = { gdpr: 1, ccpa: 1, usfl: 1, usnat: 1, ab: 1, monetization: 1 };
             window.googlefc = window.googlefc || {};
             window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
             window.googlefc.callbackQueue.push({
               CONSENT_API_READY: function () {
-                function arm() {
+                function arm(tries) {
                   var button = document.getElementById("privacy-choices");
-                  if (!button) {
-                    setTimeout(arm, 0);
+                  var openChoices = window.googlefc && window.googlefc.showRevocationMessage;
+                  if (!button || typeof openChoices !== "function") {
+                    if (tries > 0) setTimeout(function () { arm(tries - 1); }, 250);
                     return;
                   }
+                  if (button.getAttribute("data-consent-ready") === "true") return;
                   button.hidden = false;
+                  button.setAttribute("data-consent-ready", "true");
                   button.addEventListener("click", function () {
-                    window.googlefc.showRevocationMessage();
+                    if (typeof window.googlefc.showRevocationMessage === "function") {
+                      window.googlefc.showRevocationMessage();
+                    }
                   });
                 }
-                arm();
+                arm(20);
               },
             });
+            var params = new URLSearchParams(window.location.search);
+            var src = "https://fundingchoicesmessages.google.com/i/" + publisherId + "?ers=2";
+            if (params.get("fc") === "alwaysshow") {
+              src += "&fc=alwaysshow";
+              var messageType = params.get("fctype");
+              if (allowedTypes[messageType]) src += "&fctype=" + messageType;
+            }
+            var script = document.createElement("script");
+            script.async = true;
+            script.src = src;
+            document.head.appendChild(script);
           })();
         </script>
         <script
           is:inline
           async
-          src={`https://fundingchoicesmessages.google.com/i/${siteConfig.adsenseClientId.replace(/^ca-/, "")}?ers=1`}
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${siteConfig.adsenseClientId}`}
+          crossorigin="anonymous"
         ></script>
       </>
     )}
