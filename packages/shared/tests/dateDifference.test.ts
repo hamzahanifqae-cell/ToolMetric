@@ -18,14 +18,32 @@ describe("calculateDateDifference", () => {
     const result = calculateDateDifference("2024-02-28", "2024-03-01");
     expect(result.ok).toBe(true);
     // 2024 is a leap year: Feb 28 -> Feb 29 -> Mar 1 = 2 days
-    if (result.ok) expect(result.value.totalDays).toBe(2);
+    if (result.ok) {
+      expect(result.value).toEqual({
+        totalDays: 2,
+        weeks: 0,
+        remainderDays: 2,
+        years: 0,
+        months: 0,
+        days: 2,
+      });
+    }
   });
 
   it("handles a non-leap-year span correctly", () => {
     const result = calculateDateDifference("2023-02-28", "2023-03-01");
     expect(result.ok).toBe(true);
     // 2023 is not a leap year: Feb 28 -> Mar 1 = 1 day
-    if (result.ok) expect(result.value.totalDays).toBe(1);
+    if (result.ok) {
+      expect(result.value).toEqual({
+        totalDays: 1,
+        weeks: 0,
+        remainderDays: 1,
+        years: 0,
+        months: 0,
+        days: 1,
+      });
+    }
   });
 
   it("rejects malformed dates", () => {

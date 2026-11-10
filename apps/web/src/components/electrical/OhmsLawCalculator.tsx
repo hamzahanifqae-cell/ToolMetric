@@ -7,8 +7,8 @@ import { ResultCard, ErrorBanner } from "../ui/ResultCard.js";
 export function OhmsLawCalculator() {
   const id = useId();
   const [voltage, setVoltage] = useState("12");
-  const [current, setCurrent] = useState("2");
-  const [resistance, setResistance] = useState("");
+  const [current, setCurrent] = useState("");
+  const [resistance, setResistance] = useState("6");
 
   const values = { voltage, current, resistance };
   const filled = Object.values(values).filter((v) => v !== "").length;
@@ -50,8 +50,8 @@ export function OhmsLawCalculator() {
           className={secondaryButtonClass}
           onClick={() => {
             setVoltage("12");
-            setCurrent("2");
-            setResistance("");
+            setCurrent("");
+            setResistance("6");
           }}
         >
           Reset

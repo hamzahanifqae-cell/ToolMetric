@@ -94,7 +94,7 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
     {
       question: "How many days are counted between two dates?",
       answer:
-        "The count is the days elapsed from the start date to the end date. 1 January to 2 January is 1 day, and the same date twice is 0 days. Add 1 when you need both dates included. The result also shows weeks, months, and years.",
+        "The count is the days elapsed from the start date to the end date. 1 January to 2 January is 1 day, and the same date twice is 0 days. Add 1 when you need both dates included. 28 February 2024 to 1 March 2024 is 2 days because 2024 is a leap year; the same dates in 2023 are 1 day.",
     },
   ],
   discount: [
@@ -119,7 +119,7 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
     {
       question: "How do I convert kg to lbs?",
       answer:
-        "One pound is exactly 0.45359237 kilograms. Enter the value, choose kilograms and pounds, and the converter applies that factor.",
+        "Leave the units as they open, or choose kilograms and pounds. One kilogram converts to 2.204623 pounds. One pound is exactly 0.45359237 kilograms. Ounces are a separate unit: one kilogram is 35.273962 ounces, not a split into pounds and ounces.",
     },
   ],
   temperature: [

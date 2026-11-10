@@ -22,7 +22,13 @@ describe("convertLength", () => {
 
 describe("convertMass", () => {
   it("converts kilograms to pounds using the reference factor", () => {
-    expect(convertMass(1, "kilogram", "pound")).toBeCloseTo(2.20462, 4);
+    const pounds = convertMass(1, "kilogram", "pound");
+    expect(pounds).toBeCloseTo(2.20462, 4);
+    expect(Number(pounds.toFixed(6))).toBe(2.204623);
+  });
+
+  it("converts kilograms to ounces as a separate unit", () => {
+    expect(Number(convertMass(1, "kilogram", "ounce").toFixed(6))).toBe(35.273962);
   });
 
   it("round-trips without drift", () => {

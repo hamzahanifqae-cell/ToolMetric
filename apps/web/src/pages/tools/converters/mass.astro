@@ -8,11 +8,18 @@ const tool = getToolByPath("/tools/converters/mass")!;
 
 <ToolLayout
   tool={tool}
-  purpose="Convert kilograms to pounds, and between grams, ounces, stone, and tonnes."
+  purpose="Convert kilograms to pounds. The converter opens on 1 kilogram, which is 2.204623 pounds. Ounces, grams, stone, and tonnes are separate units."
 >
   <MassConverter client:load />
 
   <Fragment slot="details">
+    <h2>Convert kilograms to pounds</h2>
+    <p>
+      Leave the units on kilograms and pounds, or choose them from the two menus. One kilogram converts to 2.204623
+      pounds. The exact factor is 1 lb = 0.45359237 kg, and 1 ÷ 0.45359237 is 2.2046226218… before the six-decimal display.
+      Choosing ounces instead gives ounces on their own: 1 kilogram is 35.273962 ounces. The result is never split into pounds and ounces together.
+    </p>
+
     <h2>Common mass conversions</h2>
     <table>
       <caption>Mass factors used by this converter</caption>
@@ -64,7 +71,7 @@ const tool = getToolByPath("/tools/converters/mass")!;
 
     <h2>How to read the result</h2>
     <p>
-      The figure is shown to six decimal places. 1 kilogram is 2.204623 pounds on that display. The exact factor is 1 lb = 0.45359237 kg, and 1 ÷ 0.45359237 is 2.2046226218… before that rounding. 1 stone = 6.35029318 kilograms.
+      The figure is shown to six decimal places. The kilogram-to-pound and kilogram-to-ounce examples above use that display. 1 stone = 6.35029318 kilograms, which is 14 pounds.
     </p>
 
     <h2>Assumptions and limitations</h2>

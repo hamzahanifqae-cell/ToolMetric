@@ -23,8 +23,14 @@ const tool = getToolByPath("/tools/calculators/date-difference")!;
     <h2>Worked example</h2>
     <p>
       The calculator opens on 1 January 2024 to 31 December 2024. That span is 365 days, shown as 52 weeks and 1 day,
-      or 0 years, 11 months, and 30 days. 2024 includes 29 February, and that day is inside the span. Counting both
-      endpoints as well makes it 366 days.
+      or 0 years, 11 months, and 30 days. Counting both endpoints as well makes it 366 days.
+    </p>
+
+    <h2>Leap years</h2>
+    <p>
+      28 February 2024 to 1 March 2024 is 2 days, because 29 February falls between those dates. 28 February 2023 to
+      1 March 2023 is 1 day. Both counts leave out the start date. Including the start date as well makes those spans
+      3 days and 2 days.
     </p>
 
     <h2>Accepted inputs</h2>

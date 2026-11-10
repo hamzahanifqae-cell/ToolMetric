@@ -90,6 +90,19 @@ Hypotheses from the tool behavior, with no volume attached:
 
 Do not create a second URL for “current calculator.” It already lives on the Ohm's law path. Do not generate a page per unit pair or per keyword variant.
 
+## 2–8 November 2026
+
+Page totals supplied for this pass. Query-level landing pages were not in a Search Console export, so “kg to lbs” and “current calculator” stay on the pages that already answer those tasks.
+
+| Page | Impressions | Clicks | Average position | Query to track |
+| --- | --- | --- | --- | --- |
+| `/tools/calculators/date-difference/` | 9 | 0 | 8.33 | days between two dates |
+| `/tools/converters/mass/` | 125 | 0 | 53 | kg to lbs, convert kilograms to pounds |
+| `/tools/electrical/ohms-law/` | not in this page report |  |  | current calculator, calculate amps from volts and ohms |
+| `/tools/electrical/power/` | not in this page report |  |  | watts calculator |
+
+Date difference counts from the start date up to the end date. 1 January to 2 January is 1 day. 28 February 2024 to 1 March 2024 is 2 days; the same dates in 2023 are 1 day. Adding 1 includes the start date. One kilogram displays as 2.204623 pounds, or 35.273962 ounces when ounce is the chosen unit. The current calculator opens on 12 V and 6 Ω and shows 2 A and 24 W. The watts page still calculates watts.
+
 ## Remaining issues
 
 1. **www duplicate (manual, cPanel).** Add a permanent redirect from `https://www.toolmetric.online/*` to `https://toolmetric.online/*`. Do this in cPanel → Domains → Redirects, not by copying a new `.htaccess` over the domain document root. Confirm `/api` still responds after the redirect.

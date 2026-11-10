@@ -154,12 +154,12 @@ export const TOOLS: ToolMeta[] = [
   {
     slug: "date-difference",
     category: "calculators",
-    title: "Days Between Dates Calculator",
+    title: "Days Between Two Dates",
     metaDescription:
-      "Days between dates calculator. Find how many days, weeks, months, and years are between two dates. Free, and calculated in your browser.",
-    shortDescription: "Count the days, weeks, months, and years between two dates.",
+      "Count the days between two dates. The result runs from the start date up to the end date: 1 January to 2 January is 1 day. Free, in your browser.",
+    shortDescription: "Count the days between two dates, plus the weeks, months, and years in that span.",
     path: "/tools/calculators/date-difference",
-    keywords: ["days between dates", "date difference calculator", "how many days between", "date calculator", "duration"],
+    keywords: ["days between two dates", "days between dates", "date difference calculator", "how many days between", "date calculator"],
   },
   {
     slug: "discount",
@@ -186,7 +186,7 @@ export const TOOLS: ToolMeta[] = [
     category: "converters",
     title: "KG to Lbs Converter",
     metaDescription:
-      "Free kg to lbs converter. Convert kilograms to pounds, and between grams, ounces, stone, and tonnes. Instant results in your browser.",
+      "Convert kilograms to pounds. One kilogram is 2.204623 pounds. Also convert grams, ounces, stone, and tonnes. Free, in your browser.",
     shortDescription: "Convert kilograms to pounds, and between grams, ounces, stone, and tonnes.",
     path: "/tools/converters/mass",
     keywords: ["kg to lbs", "lbs to kg", "pounds to kg", "weight converter", "grams to ounces", "stone to kg"],
@@ -216,7 +216,7 @@ export const TOOLS: ToolMeta[] = [
     category: "electrical",
     title: "Current Calculator",
     metaDescription:
-      "Free current calculator. Find electrical current in amps from voltage and resistance with Ohm's law, I = V ÷ R. Also solves for volts and ohms.",
+      "Calculate amps from volts and ohms. Current is voltage divided by resistance: 12 V across 6 Ω is 2 A. Also solves for volts and ohms.",
     shortDescription: "Calculate current in amps from voltage and resistance, or solve for whichever value is missing.",
     path: "/tools/electrical/ohms-law",
     keywords: ["current calculator", "amp calculator", "calculate current", "ohms law calculator", "voltage calculator", "I = V/R"],

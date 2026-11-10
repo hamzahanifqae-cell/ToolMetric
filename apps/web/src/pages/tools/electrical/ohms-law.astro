@@ -8,7 +8,7 @@ const tool = getToolByPath("/tools/electrical/ohms-law")!;
 
 <ToolLayout
   tool={tool}
-  purpose="Current calculator for amps. Enter voltage and resistance, leave current blank, and Ohm's law fills it in. You can also solve for volts or ohms."
+  purpose="Calculate amps from volts and ohms. The calculator opens on 12 V and 6 Ω, with current left blank, and the result is 2 A. You can also solve for volts or ohms."
 >
   <OhmsLawCalculator client:load />
 
@@ -24,17 +24,17 @@ const tool = getToolByPath("/tools/electrical/ohms-law")!;
 
     <h2>Accepted inputs</h2>
     <p>
-      Exactly two of voltage, current, and resistance. The blank field is the one that gets solved. The calculator opens with 12 V and 2 A, and resistance blank, so it solves for resistance.
+      Exactly two of voltage in volts, current in amps, and resistance in ohms. The blank field is the one that gets solved. The calculator opens with 12 V and 6 Ω, and current blank, so it solves for current.
     </p>
 
     <h2>How to read the result</h2>
     <p>
-      The label names the value that was blank. Power is voltage times current for those same numbers, in watts. To solve for current, clear the current box and enter voltage and resistance instead.
+      Current is shown in amps, voltage in volts, and resistance in ohms. Power for the same numbers is shown in watts. The label names the value that was blank.
     </p>
 
     <h2>Worked example</h2>
     <p>
-      The opening values, 12 V and 2 A, give R = 12 ÷ 2 = 6 Ω and power = 12 × 2 = 24 W. The current example in the section above, 12 V across 6 Ω, is the other way around: leave current blank and the result is 2 A.
+      The opening values, 12 V and 6 Ω, give I = 12 ÷ 6 = 2 A and power = 12 × 2 = 24 W. To solve for resistance instead, clear resistance, enter 12 V and 2 A, and the result is 6 Ω with the same 24 W.
     </p>
 
     <h2>DC and resistive circuits only</h2>

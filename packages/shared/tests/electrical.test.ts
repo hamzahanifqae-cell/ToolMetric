@@ -21,6 +21,20 @@ describe("calculateOhmsLaw", () => {
     if (result.ok) expect(result.value.current).toBeCloseTo(2);
   });
 
+  it("matches the published 12 V and 6 Ω current example", () => {
+    const result = calculateOhmsLaw({ voltage: 12, resistance: 6 });
+    expect(result.ok).toBe(true);
+    if (result.ok) {
+      expect(result.value).toEqual({
+        voltage: 12,
+        current: 2,
+        resistance: 6,
+        power: 24,
+        solvedFor: "current",
+      });
+    }
+  });
+
   it("solves for voltage given current and resistance", () => {
     const result = calculateOhmsLaw({ current: 3, resistance: 4 });
     expect(result.ok).toBe(true);
