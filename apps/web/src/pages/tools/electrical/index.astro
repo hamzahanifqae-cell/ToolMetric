@@ -16,8 +16,9 @@ const tools = getToolsByCategory("electrical");
     <h1 class="text-2xl font-bold text-navy-900 sm:text-3xl">{category.heading}</h1>
     <p class="mt-2 max-w-2xl text-navy-600">{category.description}</p>
     <p class="mt-3 max-w-2xl text-sm text-navy-600">
-      Current uses Ohm's law and can solve for amps, volts, or ohms. Watts takes voltage and current and returns power; it does not solve for current.
-      Resistance totals resistors in series or parallel. Electricity cost estimates kilowatt-hours from watts, hours, and the rate you type.
+      Choose the current calculator when you have voltage and resistance and need amps, or any other missing Ohm's law value.
+      Choose watts when you already have voltage and current and need real power in watts or kilowatts. Choose resistance to combine resistors in series or parallel.
+      Choose electricity cost when you know an appliance's watts, how long it runs, and your price per kWh.
     </p>
     <CategoryToolGrid tools={tools} />
   </div>

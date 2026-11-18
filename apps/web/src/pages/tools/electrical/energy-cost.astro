@@ -19,10 +19,22 @@ const tool = getToolByPath("/tools/electrical/energy-cost")!;
       <li><code>Cost = kWh × your rate per kWh</code></li>
     </ul>
 
+    <h2>Accepted inputs</h2>
+    <p>
+      Power in watts, usage time in hours, a rate per kilowatt-hour, and an optional currency symbol for display. All
+      three numbers must be zero or positive. The form opens on 1,500 W, 4 hours, 0.15 per kWh, and "$".
+    </p>
+
     <h2>Worked example</h2>
     <p>
-      A 1,500W heater run for 4 hours: kWh = (1,500 × 4) ÷ 1000 = 6 kWh. At a rate of $0.15/kWh, estimated cost = 6
-      × 0.15 = $0.90.
+      A 1,500 W heater run for 4 hours: kWh = (1,500 × 4) ÷ 1000 = 6 kWh. At a rate of 0.15 per kWh, estimated cost =
+      6 × 0.15 = 0.90. A 1,000 W appliance run for 2 hours uses 2 kWh.
+    </p>
+
+    <h2>How to read the result</h2>
+    <p>
+      The energy line is kilowatt-hours for the power and hours you entered. The cost line multiplies that energy by
+      your rate and prefixes the currency symbol you typed. Changing the symbol does not convert currencies.
     </p>
 
     <h2>Assumptions and limitations</h2>
@@ -30,6 +42,7 @@ const tool = getToolByPath("/tools/electrical/energy-cost")!;
       <li>You enter your own electricity rate and currency symbol — this tool does not look up or assume any specific tariff.</li>
       <li>The estimate excludes taxes, fixed/standing charges, tiered pricing, and time-of-use rates unless you've already folded those into the rate you entered.</li>
       <li>This assumes constant power draw for the full duration entered; many real devices (e.g. appliances with compressors or thermostats) draw variable power over time, which this simple model doesn't capture.</li>
+      <li>For watts from voltage and current, use the <a href="/tools/electrical/power/">watts calculator</a> first, then enter that wattage here.</li>
       <li>Results do not determine safe wiring, breaker sizing, or electrical code compliance.</li>
     </ul>
 

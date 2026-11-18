@@ -82,12 +82,22 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
       answer:
         "Subtract the original value from the new value, divide by the absolute value of the original, and multiply by 100. A change from 150 to 180 is an increase of 20%.",
     },
+    {
+      question: "Which percentage mode should I use?",
+      answer:
+        "Use X% of Y for an amount from a known percent. Use X is what % of Y when you have two amounts. Use percentage change when a value moved from an original to a new number. For a percent-off sale price, use the discount calculator.",
+    },
   ],
   age: [
     {
       question: "How is exact age calculated?",
       answer:
         "The calculator counts whole years, then the remaining months, then the remaining days between the birth date and the date you choose. It also shows total days lived and the days until the next birthday.",
+    },
+    {
+      question: "What do total days lived and next birthday mean?",
+      answer:
+        "Total days lived is the whole calendar days between the birth date and the as-of date. Next birthday is the next anniversary on or after that as-of date, and days until next birthday counts whole days to it. For 15 June 2000 as of 15 January 2024, age is 23 years, 7 months, and 0 days, with 8,614 days lived and 152 days until 15 June 2024.",
     },
   ],
   "date-difference": [
@@ -103,6 +113,11 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
       answer:
         "Multiply the original price by the discount percent, divide by 100, and subtract that saving from the original price. A 25% discount on 80 is a saving of 20, so the sale price is 60.",
     },
+    {
+      question: "Does the discount calculator include tax?",
+      answer:
+        "No. It uses only the original price and a discount from 0% to 100%. Tax, shipping, and other fees are not added. Enter the price in whatever currency you are using; the result stays in those same units.",
+    },
   ],
   length: [
     {
@@ -112,7 +127,8 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
     },
     {
       question: "How many feet are in a meter?",
-      answer: "One meter is 3.28084 feet. One foot is exactly 0.3048 meters.",
+      answer:
+        "The converter opens on 1 meter to feet and shows 3.28084 feet. One foot is exactly 0.3048 meters. Ten miles is 16.09344 kilometers.",
     },
   ],
   mass: [
@@ -177,7 +193,7 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
     {
       question: "How do I estimate what an appliance costs to run?",
       answer:
-        "Energy in kWh is power in kilowatts multiplied by hours of use. Cost is that energy multiplied by your price per kWh. A 1000 W appliance run for 2 hours uses 2 kWh.",
+        "Energy in kWh is (watts × hours) ÷ 1000. Cost is that energy multiplied by your price per kWh. The calculator opens on 1,500 W for 4 hours at 0.15 per kWh, which is 6 kWh and 0.90. A 1,000 W appliance run for 2 hours uses 2 kWh.",
     },
   ],
 };

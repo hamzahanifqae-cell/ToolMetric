@@ -13,6 +13,18 @@ const tool = getToolByPath("/tools/calculators/percentage")!;
   <PercentageCalculator client:load />
 
   <Fragment slot="details">
+    <h2>Which mode to use</h2>
+    <ul>
+      <li>Use <strong>X% of Y</strong> when you already know the percent and need the amount, such as a tip or a share of a total.</li>
+      <li>Use <strong>X is what % of Y?</strong> when you have two amounts and need the percent that the first is of the second.</li>
+      <li>Use <strong>Percentage change</strong> when a value moved from an original number to a new number and you need the signed increase or decrease.</li>
+    </ul>
+    <p>
+      For a sale price after a percent-off discount, use the
+      <a href="/tools/calculators/discount/">discount calculator</a> instead. This page does not subtract a discount
+      from a price.
+    </p>
+
     <h2>Formulas</h2>
     <ul>
       <li><code>X% of Y = (X ÷ 100) × Y</code></li>
@@ -22,10 +34,16 @@ const tool = getToolByPath("/tools/calculators/percentage")!;
 
     <h2>Worked examples</h2>
     <ul>
-      <li>20% of 150 = (20 ÷ 100) × 150 = 30.</li>
+      <li>The calculator opens on 20 and 150 in "X% of Y" mode: 20% of 150 = (20 ÷ 100) × 150 = 30.</li>
       <li>30 is what percent of 150? (30 ÷ 150) × 100 = 20%.</li>
       <li>A price moving from 150 to 180 is a change of ((180 − 150) ÷ 150) × 100 = +20% (an increase).</li>
     </ul>
+
+    <h2>Accepted inputs</h2>
+    <p>
+      Two numbers for the selected mode. Blank or non-numeric fields show no result. Negative values are allowed where
+      they make sense for the arithmetic; the change mode labels the direction as increase, decrease, or no change.
+    </p>
 
     <h2>Assumptions and limitations</h2>
     <ul>

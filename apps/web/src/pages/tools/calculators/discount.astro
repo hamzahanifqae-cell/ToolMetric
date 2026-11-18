@@ -19,14 +19,30 @@ const tool = getToolByPath("/tools/calculators/discount")!;
       <li><code>Final price = Original price − Discount amount</code></li>
     </ul>
 
+    <h2>Accepted inputs</h2>
+    <p>
+      An original price that is zero or positive, and a discount percent from 0 to 100. The form opens on 80 and 25.
+      Values outside that percent range are rejected rather than producing a negative final price.
+    </p>
+
     <h2>Worked example</h2>
-    <p>An $80 item at 25% off: discount amount = 80 × 0.25 = $20; final price = 80 − 20 = $60.</p>
+    <p>
+      An item priced 80 at 25% off: discount amount = 80 × 0.25 = 20; final price = 80 − 20 = 60. The result line also
+      shows that you save 20 (25%). A 0% discount leaves the price unchanged. A 100% discount makes the final price 0.
+    </p>
+
+    <h2>How to read the result</h2>
+    <p>
+      The large number is the sale price after the discount. The line under it is the amount saved and the same discount
+      percent you entered. No currency conversion is applied; the units are whatever you typed for the original price.
+    </p>
 
     <h2>Assumptions and limitations</h2>
     <ul>
-      <li>Discount percentage is restricted to 0–100% in this tool. A 100% discount results in a final price of $0.</li>
-      <li>This calculator does not apply tax or additional fees — it works on the price and discount you enter.</li>
+      <li>Discount percentage is restricted to 0–100% in this tool. A 100% discount results in a final price of 0.</li>
+      <li>This calculator does not apply tax, shipping, or additional fees — it works on the price and discount you enter.</li>
       <li>Currency is not assumed; enter your price in whatever currency you're working with, and the result will be in the same units.</li>
+      <li>For "what percent is this of that" or percentage change between two prices, use the <a href="/tools/calculators/percentage/">percentage calculator</a>.</li>
     </ul>
   </Fragment>
 </ToolLayout>

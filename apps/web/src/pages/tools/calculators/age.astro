@@ -20,24 +20,40 @@ const tool = getToolByPath("/tools/calculators/age")!;
       zone is applied), so the result doesn't shift depending on where you are in the world.
     </p>
 
+    <h2>Accepted inputs</h2>
+    <p>
+      A birth date and an "as of" date. The form opens on 15 June 1995 with "as of" set to today. A date that does not
+      exist, such as 31 February, is rejected. There is no time of day.
+    </p>
+
     <h2>Worked example</h2>
     <p>
-      Someone born on June 15, 2000, measured as of January 15, 2024, is 23 years, 7 months, and 0 days old — the
-      birthday for 2024 hasn't occurred yet relative to January, so the year count hasn't incremented.
+      Someone born on 15 June 2000, measured as of 15 January 2024, is 23 years, 7 months, and 0 days old. That span is
+      8,614 whole days lived. The next birthday on that as-of date is 15 June 2024, which is 152 days away. The 2024
+      birthday has not occurred yet relative to January, so the year count has not incremented.
+    </p>
+
+    <h2>How to read the result</h2>
+    <p>
+      The large line is years, months, and days of age. "Total days lived" is the exclusive day count between the two
+      dates. "Next birthday" is the next anniversary on or after the as-of date, and "Days until next birthday" is the
+      whole days from the as-of date to that anniversary.
     </p>
 
     <h2>Leap-day birthdays</h2>
     <p>
       For a birth date of February 29, this tool observes the anniversary on February 28 in years that aren't leap
       years, and on February 29 in years that are. This is one reasonable convention (the one most civil
-      recordkeeping systems use); it is not the only valid interpretation.
+      recordkeeping systems use); it is not the only valid interpretation. When that adjustment applies to the next
+      anniversary, the result notes that the birthday is shown as February 28.
     </p>
 
     <h2>Assumptions and limitations</h2>
     <ul>
       <li>The birth date must be on or before the "as of" date.</li>
       <li>Calculations use calendar dates (YYYY-MM-DD) with no time-of-day component, so results are identical regardless of your local time zone.</li>
-      <li>"Total days lived" counts whole 24-hour calendar days between the two dates.</li>
+      <li>"Total days lived" counts whole calendar days between the two dates, the same exclusive convention as the days-between-dates calculator.</li>
+      <li>To count only the days between two calendar dates without age breakdown, use the <a href="/tools/calculators/date-difference/">days between two dates</a> tool.</li>
     </ul>
   </Fragment>
 </ToolLayout>
