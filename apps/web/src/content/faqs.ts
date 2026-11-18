@@ -128,7 +128,7 @@ export const TOOL_FAQS: Record<string, ToolFaq[]> = {
     {
       question: "How many feet are in a meter?",
       answer:
-        "The converter opens on 1 meter to feet and shows 3.28084 feet. One foot is exactly 0.3048 meters. Ten miles is 16.09344 kilometers.",
+        "One foot is exactly 0.3048 meters. The converter opens on 1 meter to feet and shows 3.28084 feet, which is the six-decimal display of 1 ÷ 0.3048, not a separate exact factor. Ten miles is exactly 16.09344 kilometers.",
     },
   ],
   mass: [

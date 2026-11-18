@@ -62,14 +62,22 @@ const tool = getToolByPath("/tools/converters/length")!;
 
     <h2>Worked example</h2>
     <p>
-      The opening conversion, 1 meter to feet, displays 3.28084 feet. Ten miles is 16.09344 kilometers. One inch is
-      exactly 2.54 centimeters.
+      The opening conversion, 1 meter to feet, displays 3.28084 feet. That figure is the six-decimal display of 1 ÷
+      0.3048 (about 3.280839895…). Ten miles is exactly 16.09344 kilometers. One inch is exactly 2.54 centimeters.
+    </p>
+
+    <h2>How to read the result</h2>
+    <p>
+      The converter shows at most six decimal places. Exact definitions such as 1 inch = 0.0254 meters and 1 foot =
+      0.3048 meters are used internally. Displayed values derived from those factors, including 3.28084 feet per meter
+      and 0.393701 inches per centimeter, are rounded and are not a second set of exact factors.
     </p>
 
     <h2>Assumptions and limitations</h2>
     <ul>
-      <li>Conversion factors use standard SI/imperial definitions and are exact to the precision shown.</li>
-      <li>Results are rounded for display; very large or very small values may show fewer significant digits due to floating-point precision limits inherent to JavaScript numbers.</li>
+      <li>Base conversion factors follow standard SI and customary definitions (for example, 1 inch = 0.0254 meters and 1 foot = 0.3048 meters exactly).</li>
+      <li>Results are rounded for display to six decimal places. A rounded display value is not itself an exact conversion factor.</li>
+      <li>Very large or very small values may show fewer significant digits because of floating-point limits in JavaScript numbers.</li>
       <li>This converts length only. For acres, square feet, or other areas, use the <a href="/tools/converters/area/">area converter</a>.</li>
     </ul>
 
