@@ -27,7 +27,7 @@ const tool = getToolByPath("/tools/image/webp-to-png")!;
 
     <h2>Assumptions and limitations</h2>
     <ul>
-      <li>PNG encoding here is lossless — pixel data is preserved exactly, though PNG files are often larger than the equivalent WebP.</li>
+      <li>PNG encoding is lossless, so it adds no compression loss of its own, though PNG files are often larger than the equivalent WebP. On your device the image is drawn through a browser canvas, which can round the colors of semi-transparent pixels slightly.</li>
       <li>Only the first frame of an animated WebP is converted; animation is not supported.</li>
       <li>Embedded metadata (such as ICC color profiles) from the source file is not carried over.</li>
     </ul>

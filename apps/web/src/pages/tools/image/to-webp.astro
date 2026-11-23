@@ -27,7 +27,8 @@ const tool = getToolByPath("/tools/image/to-webp")!;
     <h2>Assumptions and limitations</h2>
     <ul>
       <li>WebP compression here is lossy; it is not a lossless re-encode of your original file.</li>
-      <li>Quality settings influence file size but do not guarantee a specific output size — results vary by image content.</li>
+      <li>This converter has no quality control. It encodes WebP at a fixed quality of 85, on your device and on the server. To choose the quality yourself, use the <a href="/tools/image/compressor/">Image Compressor</a> with WebP output.</li>
+      <li>The output size depends on the picture and is not guaranteed to be smaller. Compare the two sizes shown under the previews before downloading.</li>
       <li>Not every older browser can decode or encode WebP; if conversion fails locally, use the server option instead.</li>
       <li>Animated inputs are not supported — only a single static image is produced.</li>
     </ul>

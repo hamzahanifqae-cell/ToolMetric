@@ -212,7 +212,7 @@ This is the exact same check `npm run build` enforces (see Production build abov
 Separately, resolve before a real public launch (not checked by the script, because they aren't things code can verify):
 
 - [ ] **Legal review** — `/privacy` and `/terms` are factual drafts describing what the code actually does. Read them yourself (or have a lawyer review them) before relying on them; nothing in this codebase has reviewed or approved their content.
-- [ ] **Terms of Use governing law/jurisdiction** — left intentionally blank in `/terms`; only the operator can supply this.
+- **No governing-law clause (not a blocker)** — by the operator's decision, `/terms` does not name a governing-law jurisdiction or dispute venue. Add one only if the operator later chooses to; never fill it in by guessing.
 - [ ] **Domain/DNS, HTTPS certificate, and reverse proxy** configured per the Production deployment section above.
 - [ ] **AdSense account/consent setup** (only if/when you enable advertising) — see the AdSense section above; this is entirely separate from, and not covered by, `launch-check`.
 - [ ] **Hosting/bandwidth/domain costs** — no paid conversion APIs are used, but ordinary hosting, bandwidth, and domain costs still apply and aren't covered by this checklist.

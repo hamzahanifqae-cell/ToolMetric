@@ -29,6 +29,7 @@ const tool = getToolByPath("/tools/image/webp-to-jpg")!;
     <ul>
       <li>JPG has no transparency channel — transparent or semi-transparent pixels are flattened onto the background color you choose.</li>
       <li>JPG compression is lossy and not reversible; some detail is lost even at high quality.</li>
+      <li>This converter has no quality control. It encodes JPG at a fixed quality of 85, on your device and on the server. To choose the quality yourself, use the <a href="/tools/image/compressor/">Image Compressor</a> with JPEG output.</li>
       <li>Only the first frame of an animated WebP is converted.</li>
     </ul>
 

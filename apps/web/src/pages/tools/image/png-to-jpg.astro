@@ -29,7 +29,8 @@ const tool = getToolByPath("/tools/image/png-to-jpg")!;
     <h2>Assumptions and limitations</h2>
     <ul>
       <li>JPG has no transparency channel — any transparent or semi-transparent pixels are flattened onto the background color you choose.</li>
-      <li>JPG compression is lossy: some fine detail and color precision is lost, even at high quality settings. This is not reversible.</li>
+      <li>JPG compression is lossy: some fine detail and color precision is lost. This is not reversible.</li>
+      <li>This converter has no quality control. It encodes JPG at a fixed quality of 85, on your device and on the server. To choose the quality yourself, use the <a href="/tools/image/compressor/">Image Compressor</a> with JPEG output.</li>
       <li>PNG metadata (such as embedded color profiles) is not preserved in the output.</li>
       <li>Animated PNGs (APNG) are not supported — only the first frame is processed.</li>
       <li>Very large images (beyond roughly 40 megapixels) are rejected to keep processing fast and memory-safe.</li>

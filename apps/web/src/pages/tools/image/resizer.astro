@@ -31,6 +31,8 @@ const tool = getToolByPath("/tools/image/resizer")!;
       <li>Output dimensions are capped (currently 10,000px per side) to avoid excessive memory use.</li>
       <li>Resizing up (enlarging) is supported but can make an image look soft or blurry, since no new detail is created.</li>
       <li>Choosing JPEG output flattens transparency onto your chosen background color; PNG and WebP preserve it.</li>
+      <li>The output format starts at PNG. A photo saved as PNG is often larger than the original JPG, even after it has been made smaller in pixels. For photos, choose JPEG or WebP and compare the sizes shown under the previews.</li>
+      <li>JPEG and WebP output use a fixed quality of 85 here. To choose the quality, resize first and then run the result through the <a href="/tools/image/compressor/">Image Compressor</a>.</li>
     </ul>
 
     <h2>Accepted inputs</h2>
