@@ -51,6 +51,24 @@ import { breadcrumbJsonLd } from "../lib/structuredData.js";
 
       <h2>Changes</h2>
       <p>These terms may be updated from time to time. Continued use of the site after changes constitutes acceptance of the updated terms.</p>
+
+      <h2>Contact</h2>
+      <p>
+        {
+          siteConfig.operatorEmail ? (
+            <>
+              Questions about these terms can be sent to{" "}
+              <a href={`mailto:${siteConfig.operatorEmail}`} class="font-semibold text-teal-700 underline">
+                {siteConfig.operatorEmail}
+              </a>
+              .{" "}
+            </>
+          ) : (
+            <>No public email address is listed. </>
+          )
+        }
+        The <a href="/contact/">contact page</a> has more detail.
+      </p>
     </div>
   </div>
 </BaseLayout>
