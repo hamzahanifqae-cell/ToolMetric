@@ -101,6 +101,9 @@ later won't touch or overwrite it.
 ```bash
 rm -rf ~/public_html/*          # only if you've confirmed it's safe to clear (step "Before you start")
 cp -r ~/ToolMetric/apps/web/dist/* ~/public_html/
+# `*` skips dotfiles, so copy the redirect rules (http/www -> https://toolmetric.online) separately.
+# If ~/public_html/.htaccess already has rules you need, merge them by hand instead.
+cp ~/ToolMetric/apps/web/dist/.htaccess ~/public_html/.htaccess
 ```
 
 ## 5. Configure the Node.js app's environment variables and start it
@@ -174,6 +177,7 @@ npm install   # only needed if package.json changed
 PUBLIC_SITE_URL=https://toolmetric.online npm run build
 deactivate
 cp -r apps/web/dist/* ~/public_html/
+cp apps/web/dist/.htaccess ~/public_html/.htaccess   # dotfile, not copied by *
 ```
 Then click **Restart App** in cPanel (only needed if `apps/api` changed —
 the web app's static files don't need a restart).

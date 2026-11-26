@@ -4,6 +4,15 @@ import { MassConverter } from "../../../components/converters/MassConverter.js";
 import { getToolByPath } from "../../../content/tools.js";
 
 const tool = getToolByPath("/tools/converters/mass")!;
+
+// Chart values use the exact definition 1 lb = 0.45359237 kg, rounded for display.
+const LB_IN_KG = 0.45359237;
+const fmt = (n: number, digits: number) =>
+  n.toLocaleString("en-US", { minimumFractionDigits: digits, maximumFractionDigits: digits });
+const kgValues = [0.1, 0.25, 0.5, 0.9, 1, 1.1, 1.25, 1.5, 1.6, 1.8, 1.9, 2, 2.5, 2.85, 3, 4, 5, 6, 7, 8, 9, 10, 11.8, 12, 15, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 100, 150, 160, 200];
+const kgToLbRows = kgValues.map((kg) => ({ kg: String(kg), lb: fmt(kg / LB_IN_KG, 2) }));
+const lbValues = [1, 2, 5, 10, 15, 20, 25, 50, 100, 150, 200];
+const lbToKgRows = lbValues.map((lb) => ({ lb: String(lb), kg: fmt(lb * LB_IN_KG, 3) }));
 ---
 
 <ToolLayout
@@ -50,6 +59,47 @@ const tool = getToolByPath("/tools/converters/mass")!;
           <td>1 metric tonne</td>
           <td>1,000 kilograms</td>
         </tr>
+      </tbody>
+    </table>
+    <h2 id="kg-to-lbs-chart">Kg to lbs chart</h2>
+    <p>
+      Each row is the kilogram value divided by 0.45359237, rounded to two decimal places. For a value that is not
+      listed, type it into the converter above.
+    </p>
+    <table>
+      <caption>Kilograms to pounds</caption>
+      <thead>
+        <tr>
+          <th scope="col">Kilograms (kg)</th>
+          <th scope="col">Pounds (lb)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {kgToLbRows.map((row) => (
+          <tr>
+            <td>{row.kg} kg</td>
+            <td>{row.lb} lb</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <h2 id="lbs-to-kg-chart">Lbs to kg chart</h2>
+    <table>
+      <caption>Pounds to kilograms, rounded to three decimal places</caption>
+      <thead>
+        <tr>
+          <th scope="col">Pounds (lb)</th>
+          <th scope="col">Kilograms (kg)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {lbToKgRows.map((row) => (
+          <tr>
+            <td>{row.lb} lb</td>
+            <td>{row.kg} kg</td>
+          </tr>
+        ))}
       </tbody>
     </table>
     <p>

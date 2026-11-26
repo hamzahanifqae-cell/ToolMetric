@@ -186,7 +186,7 @@ export const TOOLS: ToolMeta[] = [
     category: "converters",
     title: "KG to Lbs Converter",
     metaDescription:
-      "Convert kilograms to pounds. One kilogram is 2.204623 pounds. Also convert grams, ounces, stone, and tonnes. Free, in your browser.",
+      "Convert kg to lbs: 1 kg = 2.204623 lb. Includes a kg to lbs chart (0.1 kg to 200 kg) and lbs to kg chart, plus grams, ounces, stone, and tonnes.",
     shortDescription: "Convert kilograms to pounds, and between grams, ounces, stone, and tonnes.",
     path: "/tools/converters/mass",
     keywords: ["kg to lbs", "lbs to kg", "pounds to kg", "weight converter", "grams to ounces", "stone to kg"],
@@ -206,7 +206,7 @@ export const TOOLS: ToolMeta[] = [
     category: "converters",
     title: "Area Converter",
     metaDescription:
-      "Free area converter for acres, square feet, square meters, and hectares. Convert land and floor area instantly in your browser.",
+      "Free area converter with an area conversion table: acres, square feet, square meters, hectares, and square miles. 1 acre = 43,560 sq ft.",
     shortDescription: "Area converter for acres, square feet, square meters, hectares, and square miles.",
     path: "/tools/converters/area",
     keywords: ["area converter", "converter area", "acres to square feet", "square meters to square feet", "hectares to acres"],

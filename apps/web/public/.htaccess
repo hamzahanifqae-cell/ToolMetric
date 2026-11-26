@@ -1,0 +1,22 @@
+# Apache/cPanel for https://toolmetric.online/
+# Host redirects below are specific to this production domain.
+# Do not copy them onto a staging host.
+#
+# Deploy note: `cp -r dist/* ~/public_html/` skips dotfiles. Copy this file
+# explicitly (cp apps/web/dist/.htaccess ~/public_html/) and merge it with any
+# rules already in ~/public_html/.htaccess instead of overwriting them.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # One host: https://toolmetric.online/ (www and plain HTTP are duplicates).
+  RewriteCond %{HTTP_HOST} ^www\.toolmetric\.online$ [NC]
+  RewriteRule ^ https://toolmetric.online%{REQUEST_URI} [L,R=301]
+
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://toolmetric.online%{REQUEST_URI} [L,R=301]
+
+  # Permanent alias. Submit /sitemap-index.xml in Search Console.
+  RewriteRule ^sitemap\.xml$ https://toolmetric.online/sitemap-index.xml [L,R=301]
+</IfModule>
